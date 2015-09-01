@@ -1,0 +1,6 @@
+#/bin/bash
+
+NOW=$(date +"%d_%m_%Y-%H:%M:%S")
+echo $NOW
+
+pg_dump -U rpg rpg > ~/bkp/rpg-bkp.${NOW}.sql

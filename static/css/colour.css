@@ -1,0 +1,333 @@
+.colour {
+  /* Removes awkward default styles on some inputs for iOS */
+}
+.colour #appointments .entry {
+  padding-bottom: 0.125em;
+}
+.colour #appointments .elected {
+  font-weight: bold;
+}
+.colour #appointments .tooltip:after {
+  content: 'Voted by: ' attr(data-tooltip);
+}
+.colour #appointments .tooltip:hover:after {
+  bottom: 00%;
+  right: calc(101.3%);
+  display: block;
+  left: inherit;
+  padding: 0.2em 0.2em 0.3em 1em;
+  margin: -0.3em;
+  /* I have no idea, where it comes from. */
+  margin-right: 1em;
+}
+.colour #appointments .tooltip:after {
+  display: none;
+  left: inherit;
+}
+.colour #char-gallery {
+  margin-top: 1em;
+  border-top: 1px solid black;
+  padding-top: 1em;
+}
+.colour .gallery {
+  border-bottom: 1px solid black;
+}
+.colour .gallery:last-child {
+  border-bottom: none;
+}
+.colour #modal .header {
+  border-bottom: 3px solid;
+}
+.colour #modal #all-my-roles * {
+  padding: 1px;
+}
+.colour #modal #all-my-roles > span {
+  display: none;
+}
+.colour #modal #all-my-roles .lvl3 {
+  padding-left: 1em;
+}
+.colour nav *,
+.colour nav .tooltip:after {
+  background-color: white;
+}
+.colour #role-nav {
+  color: white;
+  background-color: #6c2412;
+}
+.colour #role-nav input.delete {
+  min-width: inherit;
+}
+.colour #role-nav > div > span {
+  display: block;
+  padding-bottom: 0.2em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  text-align: center;
+  background-color: #6c2412;
+}
+.colour #role-nav > div > div {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  border-top: none;
+  padding: 0 0.2em 0.2em 0.2em;
+}
+.colour #role-nav .lvl2 ~ * {
+  padding-left: 1em;
+}
+.colour #play-nav > * {
+  padding: 0.4em 0 0.6em 0;
+  display: inline-block;
+  color: #bea008;
+  background-color: #6c2412;
+  border: 1px solid black;
+  border-bottom: none;
+  width: 20%;
+  text-align: center;
+}
+.colour #play-nav {
+  box-shadow: inset 0px -25px 20px -20px #6c2412;
+}
+.colour #play-nav > .selected {
+  z-index: 3;
+  border-bottom: none;
+  background-color: #ffffe9;
+  font-weight: normal;
+}
+.colour #breaker {
+  border: 1px solid black;
+  background-color: #6c2412;
+  height: 1.5em;
+}
+.colour #wiki-overview-tags span {
+  margin: 3px 6px;
+}
+.colour .tag.selected {
+  background-color: #ffffe9;
+}
+.colour .tag > * {
+  background-color: gainsboro;
+  padding: 3px;
+  border: 1px solid black;
+  display: inline-block;
+}
+.colour .tag,
+.colour #wiki-grid thead {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+}
+.colour #wiki-view {
+  position: relative;
+}
+.colour #wiki-overview-add {
+  margin-bottom: 10px;
+}
+.colour #wiki-view-title {
+  font-size: 2.2em;
+}
+.colour th,
+.colour .header {
+  color: #ddc342;
+  background-color: #6c2412;
+  font-weight: bold;
+}
+.colour #pane > * {
+  padding: 2em;
+  padding-top: 0.4em;
+  border-top: none;
+  background-color: white;
+}
+.colour .summary {
+  border: 1px solid #bea008;
+  margin: 0 0 1em 1em;
+  background-color: white;
+}
+.colour .summary > * {
+  padding: 0 0.333333em;
+}
+.colour .tooltip:after {
+  border-left: 2px solid grey;
+  border-right: none;
+}
+.colour div.priv {
+  padding: 1em;
+}
+.colour .summary .content :first-child {
+  margin-top: 0.35em;
+}
+.colour .summary .content :last-child {
+  margin-bottom: 0.35em;
+}
+.colour form {
+  border: 1px solid black;
+  box-shadow: 0 0 20px 5px #6c2412;
+}
+.colour form > * {
+  padding: 0;
+}
+.colour td,
+.colour th {
+  padding: 0.333333em;
+}
+.colour table,
+.colour tr,
+.colour td,
+.colour th {
+  border: 1px solid #bea008;
+  border-collapse: collapse;
+}
+.colour tr:nth-child(even) {
+  background-color: white;
+}
+.colour tr:nth-child(odd) {
+  background-color: #ffffe9;
+}
+.colour .btn-container > * {
+  margin: 0.35em;
+  margin-top: 0.7em;
+}
+.colour input[type="email"],
+.colour input[type="number"],
+.colour input[type="search"],
+.colour input[type="text"],
+.colour input[type="tel"],
+.colour input[type="url"],
+.colour input[type="password"],
+.colour textarea,
+.colour select {
+  height: 3em;
+  padding: 0.58em 0.97em;
+  background-color: white;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+.colour input[type="email"],
+.colour input[type="number"],
+.colour input[type="search"],
+.colour input[type="text"],
+.colour input[type="tel"],
+.colour input[type="url"],
+.colour input[type="password"],
+.colour textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.colour textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.colour input[type="email"]:focus,
+.colour input[type="number"]:focus,
+.colour input[type="search"]:focus,
+.colour input[type="text"]:focus,
+.colour input[type="tel"]:focus,
+.colour input[type="url"]:focus,
+.colour input[type="password"]:focus,
+.colour textarea:focus,
+.colour select:focus {
+  border: 1px solid #33C3F0;
+  outline: 0;
+}
+.colour input[type="checkbox"],
+.colour input[type="radio"] {
+  /* display: inline; it was useful for something ...*/
+}
+.colour h1 {
+  font-weight: normal;
+  font-size: 1.2em;
+  color: #bea008;
+  border-bottom: 1px solid #bea008;
+}
+.colour h2 {
+  font-weight: normal;
+  font-size: 1.1em;
+  color: #bea008;
+  width: 75%;
+  border-bottom: 1px solid #bea008;
+}
+.colour h3 {
+  font-weight: normal;
+  font-size: 0.95em;
+  color: #bea008;
+  width: 25%;
+  border-bottom: 1px dotted #bea008;
+}
+.colour h4 {
+  font-weight: normal;
+  color: #bea008;
+}
+.colour h5 {
+  display: inline-block;
+  margin-right: 1em;
+  color: #bea008;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.colour h6 {
+  display: inline-block;
+  margin-right: 0.27em;
+  color: #bea008;
+  font-style: italic;
+}
+.colour h6:after {
+  content: ":";
+}
+.colour span.tag,
+.colour .button,
+.colour button,
+.colour input[type="submit"],
+.colour input[type="reset"],
+.colour input[type="button"] {
+  height: 1.5em;
+  padding: 0 1em;
+  line-height: 1.3em;
+  color: #ddc342;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: #6c2412;
+  border: 1px solid black;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-family: 'Ubuntu' monospace;
+  font-size: 1em;
+}
+.colour span.tag:hover,
+.colour .button:hover,
+.colour button:hover,
+.colour input[type="submit"]:hover,
+.colour input[type="reset"]:hover,
+.colour input[type="button"]:hover,
+.colour .button:focus,
+.colour button:focus,
+.colour input[type="submit"]:focus,
+.colour input[type="reset"]:focus,
+.colour input[type="button"]:focus {
+  color: #6c2412;
+  background-color: #ffffe9;
+  outline: 0;
+}
+.colour nav input[type="button"],
+.colour form .content input[type="button"] {
+  margin: auto 3px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+  border: none;
+}
+.colour .toc *:hover {
+  color: #a5774d;
+}
+body.colour {
+  background-color: Ivory;
+  margin-top: 0;
+  box-shadow: 0 0 20px 5px #6c2412;
+}

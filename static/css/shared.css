@@ -1,0 +1,510 @@
+/* Stressed */
+.selected,
+th,
+.header,
+label,
+legend,
+.elected,
+.emph,
+.selected + * > .info {
+  font-weight: bold;
+}
+table {
+  width: 100%;
+}
+nav,
+.gallery .pic,
+.tag,
+#wiki-grid thead {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+}
+nav.stick {
+  position: fixed;
+  top: 0;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline;
+}
+.selectable {
+  cursor: pointer;
+}
+.leftright {
+  display: flex;
+  justify-content: space-between;
+}
+#hidden-zone,
+.hidden,
+input[type="checkbox"].hidden,
+input[type="radio"].hidden {
+  display: none;
+}
+#notification-bar {
+  display: block;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  max-width: 1250px;
+  font-size: 1.5em;
+  line-height: 1.6;
+  font-weight: 400;
+  margin: 8px auto;
+}
+#pane > * {
+  display: none;
+  max-width: 100%;
+  font-family: 'Ovo', sans-serif;
+}
+#pane > .selected {
+  display: block;
+  min-height: 10em;
+  font-weight: inherit;
+}
+.asc:after,
+.desc:after {
+  content: ' ';
+  position: relative;
+  left: 10px;
+  border: 8px solid transparent;
+}
+.asc:after {
+  top: 10px;
+  border-top-color: silver;
+}
+.desc:after {
+  bottom: 15px;
+  border-bottom-color: silver;
+}
+dt:after {
+  content: ":";
+}
+dt {
+  font-style: italic;
+}
+dd {
+  margin-bottom: 0.5em;
+}
+.summary {
+  width: 30em;
+  max-width: 100%;
+  float: right;
+}
+.summary {
+  margin: 0 0 1em 1em;
+}
+div.priv {
+  border-left: 2px solid red;
+  background-color: #ffe8e8;
+}
+span.priv {
+  font-style: italic;
+  color: red;
+}
+.priv .summary {
+  border: 1px solid red;
+}
+.priv *:first-child {
+  margin-top: 0;
+}
+.priv *:last-child {
+  margin-bottom: 0;
+}
+.summary .header {
+  text-align: center;
+}
+table,
+tr,
+td,
+th {
+  border-collapse: collapse;
+}
+.toc {
+  margin-left: 1em;
+}
+.toc *:before {
+  content: attr(data-num) ' ';
+}
+.toc .lvl2 {
+  padding-left: 1em;
+}
+.toc .lvl3 {
+  padding-left: 2em;
+}
+.toc .lvl4 {
+  padding-left: 3em;
+}
+.toc .lvl5 {
+  padding-left: 4em;
+}
+.toc .lvl6 {
+  padding-left: 5em;
+}
+.tooltip {
+  position: relative;
+  text-decoration: none;
+}
+.tooltip:after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%;
+  left: 20%;
+  white-space: nowrap;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+.tooltip:hover:after {
+  bottom: 100%;
+}
+.tooltip:hover:after {
+  opacity: 1;
+}
+.permission-select > div {
+  display: flex;
+  padding: 0.13em;
+  border: none;
+}
+.permission-select > div > span {
+  display: inline-block;
+  text-align: left;
+  width: 11em;
+}
+.permission-select > div > select {
+  display: inline-block;
+  max-width: 15em;
+  min-width: 1em;
+}
+input[type="button"].hidden {
+  display: none;
+}
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+}
+form .btn-container {
+  justify-content: center;
+}
+.btn-container > *:last-child {
+  margin-right: 0px;
+}
+.btn-container > *:first-child {
+  margin-left: 0px;
+}
+/*
+ * Appointment
+ */
+/* #appointments {*/
+.date.tooltip:after {
+  content: 'Voted by: ' attr(data-tooltip);
+}
+.date.tooltip:hover:after {
+  bottom: 00%;
+  right: calc(101.3%);
+  display: block;
+  left: inherit;
+}
+.date.tooltip:after {
+  display: none;
+  left: inherit;
+}
+/*
+ * Wiki
+ */
+#wiki-overview col.title {
+  width: 30%;
+}
+#wiki-overview col.short {
+  width: 70%;
+}
+#wiki-overview div.tag:before {
+  content: "Tags: ";
+  font-weight: bold;
+  vertical-align: middle;
+}
+span.tag {
+  display: inline-block;
+}
+/*
+ * History
+ */
+#history-content {
+  display: flex;
+}
+#history-detail {
+  flex: 4 2 20em;
+  margin-left: 10px;
+}
+#history-detail .date-ingame:before,
+#history-detail .date-outgame:before {
+  font-style: normal;
+  font-weight: bold;
+  display: inline-block;
+  width: 5em;
+}
+#history-detail .date-ingame:before {
+  content: "Ingame: ";
+}
+#history-detail .date-outgame:before {
+  content: "Outgame: ";
+}
+#history-timelist {
+  flex: 1 1 10em;
+  margin-right: 10px;
+}
+#history-timelist .date-ingame:before {
+  content: "IG: ";
+}
+#history-timelist .date-outgame:before {
+  content: "OG: ";
+}
+#history-timelist .date-ingame:before,
+#history-timelist .date-outgame:before {
+  display: inline-block;
+  font-weight: bold;
+  width: 2.3em;
+}
+#history-timelist input[type=button] {
+  width: 50%;
+}
+#history-timelist .title {
+  margin-bottom: 0;
+}
+#history-timelist > * {
+  margin: 15px auto;
+  margin-right: 10px;
+  padding-bottom: 15px;
+}
+.history-detail-entry > .content {
+  display: block;
+  min-height: 8em;
+}
+/*
+ * Char
+ */
+#char-gallery {
+  margin-top: 1em;
+  padding-top: 1em;
+}
+#char-content {
+  min-height: 8em;
+  display: block;
+}
+/*
+ * Gallery
+ */
+.gallery {
+  padding: 10px;
+}
+.gallery-info {
+  min-height: 200px;
+}
+.gallery-info img {
+  float: left;
+  margin-right: 15px;
+}
+#modal {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  /* background-color: #fff; */
+}
+#modal.hidden {
+  display: none;
+}
+#modal .small {
+  max-width: 25em;
+  min-width: 0;
+}
+#modal form {
+  background-color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+#modal form ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#modal > * {
+  width: 65%;
+  max-width: 60em;
+  min-width: 25em;
+  text-align: center;
+}
+#modal label {
+  min-width: 30%;
+  text-align: left;
+}
+#modal label + input {
+  width: 100%;
+}
+#modal label + textarea {
+  width: 100%;
+  display: block;
+  height: 24em;
+}
+#modal label + textarea.short {
+  height: 10em;
+}
+#modal .entry {
+  margin: 0.4em;
+}
+#modal .btn-container {
+  padding: 4px;
+}
+#modal #all-my-roles {
+  text-align: left;
+}
+#modal #all-my-roles * {
+  padding: 1px;
+}
+#modal #all-my-roles > span {
+  display: none;
+}
+#modal #all-my-roles .lvl2 {
+  font-size: 1.2em;
+}
+#modal #all-my-roles .lvl3 {
+  padding-left: 1em;
+}
+/*
+ * Nav
+ */
+#logo {
+  padding-top: 7px;
+  margin-bottom: 7px;
+  text-align: center;
+}
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.2em;
+  z-index: 1;
+  font-family: 'Ubuntu', sans-serif;
+  font-variant: small-caps;
+}
+nav > * {
+  width: 25%;
+  position: relative;
+}
+#role-nav > div > span,
+#play-nav span {
+  display: block;
+  text-align: center;
+}
+#role-nav > div > div {
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 50;
+}
+#role-nav > div:hover > div {
+  display: block;
+}
+#role-nav .lvl2 ~ * > div,
+#all-my-roles .lvl2 ~ * > div {
+  display: flex;
+  justify-content: space-between;
+}
+#role-nav .lvl2 ~ * {
+  padding-left: 1em;
+}
+.info:before {
+  content: '(';
+}
+.info:after {
+  content: ')';
+}
+/*
+ * Slider
+ */
+.imgslider {
+  margin-top: 1em;
+  min-height: 100vh;
+}
+.imgslider .orderable {
+  max-height: 90vh;
+  margin-top: 5vh;
+  overflow-y: auto;
+  padding-right: 30px;
+}
+.imgslider .orderable .bg {
+  width: 200px;
+  display: flex;
+}
+.imgslider .orderable .pic {
+  display: flex;
+}
+.imgslider .orderable .pic img {
+  margin: auto;
+}
+.imgslider .orderable-row {
+  margin-bottom: 5px;
+}
+.image-collection {
+  margin-left: 1em;
+}
+.image-collection .slider-element > input[type=radio] {
+  display: none;
+}
+.image-collection .slider-element {
+  border: none;
+}
+.image-collection .slider-element > * {
+  display: none;
+}
+.image-collection .slider-element > input:checked + div {
+  display: block;
+}
+.image-collection label {
+  position: relative;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 4em;
+  padding: 240px 25px;
+  display: block;
+}
+.image-collection .bg {
+  width: 600px;
+  height: 600px;
+  display: flex;
+  /* align-items: center;*/
+}
+.image-collection .pic {
+  display: flex;
+  /* justify-content: center;*/
+  margin-bottom: 2em;
+}
+.image-collection .pic img {
+  margin: auto;
+}
+img[src=""],
+div:empty {
+  display: none;
+}
+div.rotate {
+  transform: rotate(-90deg);
+}
+th.rotate {
+  border: none;
+  height: 4.6em;
+  background-color: white;
+  color: black;
+  padding: 0.2em;
+}

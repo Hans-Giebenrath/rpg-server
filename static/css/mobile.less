@@ -1,0 +1,68 @@
+.pane > * {
+	/* otherwise too much waste on the sides. */
+	padding: 1em;
+}
+
+#mobile-sidebar {
+	display: flex;
+	position: fixed;
+	top: 0.2em;
+	right: 0.2em;
+	flex-direction: column;
+	width: initial;
+	
+	> label {
+		width: 2.2em;
+		height: 2.2em;
+		line-height: 2em;
+		border-radius: 0.2em;
+		border: 2px solid #e1e1e1;
+		text-align: center;
+		margin: 0.3em 0;
+	}
+}
+
+#role-nav > input[type="checkbox"]:checked + div {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: calc(~"100% - 3em");
+	width: -webkit-calc(~"100% - 3em");
+	max-height: 100vh;
+	overflow: auto;
+	.lvl1 {
+		display: block;
+		width: initial;
+		position: initial;
+	}
+
+}
+
+#role-nav > input[type="checkbox"] + div {
+	display: none;
+}
+
+#logo {
+	display: none;
+}
+
+#history-timelist {
+	display: none;
+}
+
+#misc, #this-group, #all-my-roles {
+	z-index: 50;
+	.lvl1, .lvl2 {
+		z-index: 50;
+		span, div {
+			margin-top: 0.3em;
+		}
+	}
+}
+
+#play-nav {
+	width: calc(~"100% - 3em");
+	width: -webkit-calc(~"100% - 3em");
+}

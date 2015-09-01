@@ -1,0 +1,77 @@
+.pane > * {
+  /* otherwise too much waste on the sides. */
+  padding: 1em;
+}
+#mobile-sidebar {
+  display: flex;
+  position: fixed;
+  top: 0.2em;
+  right: 0.2em;
+  flex-direction: column;
+  width: initial;
+}
+#mobile-sidebar > label {
+  width: 2.2em;
+  height: 2.2em;
+  line-height: 2em;
+  border-radius: 0.2em;
+  border: 2px solid #e1e1e1;
+  text-align: center;
+  margin: 0.3em 0;
+}
+#role-nav > input[type="checkbox"]:checked + div {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 3em);
+  width: -webkit-calc(100% - 3em);
+  max-height: 100vh;
+  overflow: auto;
+}
+#role-nav > input[type="checkbox"]:checked + div .lvl1 {
+  display: block;
+  width: initial;
+  position: initial;
+}
+#role-nav > input[type="checkbox"] + div {
+  display: none;
+}
+#logo {
+  display: none;
+}
+#history-timelist {
+  display: none;
+}
+#misc,
+#this-group,
+#all-my-roles {
+  z-index: 50;
+}
+#misc .lvl1,
+#this-group .lvl1,
+#all-my-roles .lvl1,
+#misc .lvl2,
+#this-group .lvl2,
+#all-my-roles .lvl2 {
+  z-index: 50;
+}
+#misc .lvl1 span,
+#this-group .lvl1 span,
+#all-my-roles .lvl1 span,
+#misc .lvl2 span,
+#this-group .lvl2 span,
+#all-my-roles .lvl2 span,
+#misc .lvl1 div,
+#this-group .lvl1 div,
+#all-my-roles .lvl1 div,
+#misc .lvl2 div,
+#this-group .lvl2 div,
+#all-my-roles .lvl2 div {
+  margin-top: 0.3em;
+}
+#play-nav {
+  width: calc(100% - 3em);
+  width: -webkit-calc(100% - 3em);
+}

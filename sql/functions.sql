@@ -1,0 +1,9 @@
+\ir checks.sql
+\ir create.sql;
+\ir delete.sql;
+\ir update.sql;
+\ir edit.sql;
+\ir list.sql;
+\ir view.sql;
+\ir misc.sql;
+\ir configuration.sql

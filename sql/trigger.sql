@@ -1,0 +1,5 @@
+-- delete group: delete gallery_broker, images should be deleted in application layer (place images on filesystem in directory named <group_id> -> deletin pretty easy
+-- delete gallery: delete permission_broker (place images in firectory named <group_id>/<gallery_id> 
+-- delete user: delete all images from that user (done by deleting all images from its character), delete permission_broker
+-- delete character: delete all images from that character, delete gallery, delete permission_broker
+-- delete image: delete permission_broker

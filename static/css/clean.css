@@ -1,0 +1,257 @@
+.clean {
+  /* Removes awkward default styles on some inputs for iOS */
+}
+.clean #appointments > .entry {
+  padding-bottom: 0.125em;
+}
+.clean .date.tooltip:hover:after {
+  margin-bottom: 0.35em;
+  padding: 0.2em 1em;
+}
+.clean #char-gallery {
+  border-top: 1px solid #e1e1e1;
+}
+.clean .gallery {
+  border-bottom: 1px solid #e1e1e1;
+}
+.clean .gallery:last-child {
+  border-bottom: none;
+}
+.clean #history-timelist > .orderable-row {
+  border-bottom: 1px solid #e1e1e1;
+}
+.clean #history-timelist > .orderable-row:last-child {
+  border-bottom: none;
+}
+.clean .history-detail-entry {
+  border-bottom: 1px solid #e1e1e1;
+  margin-top: 1em;
+}
+.clean .history-detail-entry:last-child {
+  border-bottom: none;
+}
+.clean nav {
+  border-bottom: 1px solid #e1e1e1;
+  border-top: 1px solid #e1e1e1;
+}
+.clean nav *,
+.clean nav .tooltip:after {
+  background-color: #f5f5f5;
+}
+.clean nav,
+.clean nav > *,
+.clean nav > * :first-child {
+  background-color: #f5f5f5;
+}
+.clean #role-nav > div > span,
+.clean #play-nav span {
+  padding: 0.5em;
+  padding-bottom: 0.7em;
+}
+.clean #role-nav > div > div {
+  color: black;
+  border: 1px solid #e1e1e1;
+  border-top: none;
+  padding: 0 1em 1em 1em;
+  border-radius: 0 0 8px 8px;
+}
+.clean span.tag.selected {
+  color: white;
+  background-color: #33c3f0;
+  border-color: #33c3f0;
+}
+.clean span.tag.selected:hover {
+  background-color: #1eaedb;
+  border-color: #1eaedb;
+}
+.clean #pane > * {
+  padding: 2em;
+  padding-top: 0.4em;
+  border-top: none;
+  background-color: white;
+}
+.clean .summary,
+.clean .tooltip:after {
+  border-left: 2px solid grey;
+  border-right: none;
+  background-color: #f5f5f5;
+}
+.clean div.priv {
+  padding: 1em;
+}
+.clean .summary .content :first-child {
+  margin-top: 0.35em;
+}
+.clean .summary .content :last-child {
+  margin-bottom: 0.35em;
+}
+.clean .summary > *,
+.clean form > * {
+  margin: 0.8em 1em;
+  padding: 0;
+}
+.clean form {
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+.clean td,
+.clean th {
+  padding: 0.8em 1em;
+}
+.clean table,
+.clean tr,
+.clean td,
+.clean th {
+  border-bottom: 1px solid #e1e1e1;
+  text-align: left;
+  color: black;
+  background-color: white;
+}
+.clean .btn-container > * {
+  margin: 0.35em;
+  margin-top: 0.7em;
+}
+.clean input[type="email"],
+.clean input[type="number"],
+.clean input[type="search"],
+.clean input[type="text"],
+.clean input[type="tel"],
+.clean input[type="url"],
+.clean input[type="password"],
+.clean textarea,
+.clean select {
+  height: 3em;
+  padding: 0.58em 0.97em;
+  background-color: white;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+.clean input[type="email"],
+.clean input[type="number"],
+.clean input[type="search"],
+.clean input[type="text"],
+.clean input[type="tel"],
+.clean input[type="url"],
+.clean input[type="password"],
+.clean textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.clean textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.clean input[type="email"]:focus,
+.clean input[type="number"]:focus,
+.clean input[type="search"]:focus,
+.clean input[type="text"]:focus,
+.clean input[type="tel"]:focus,
+.clean input[type="url"]:focus,
+.clean input[type="password"]:focus,
+.clean textarea:focus,
+.clean select:focus {
+  border: 1px solid #33C3F0;
+  outline: 0;
+}
+.clean h1,
+.clean h2,
+.clean h3,
+.clean h4,
+.clean h5,
+.clean h6 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+.clean h1 {
+  font-size: 4.0rem;
+  line-height: 1.2;
+  letter-spacing: -0.1rem;
+}
+.clean h2 {
+  font-size: 3.6rem;
+  line-height: 1.25;
+  letter-spacing: -0.1rem;
+}
+.clean h3 {
+  font-size: 3.0rem;
+  line-height: 1.3;
+  letter-spacing: -0.1rem;
+}
+.clean h4 {
+  font-size: 2.4rem;
+  line-height: 1.35;
+  letter-spacing: -0.08rem;
+}
+.clean h5 {
+  font-size: 1.8rem;
+  line-height: 1.5;
+  letter-spacing: -0.05rem;
+}
+.clean h6 {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+.clean span.tag,
+.clean .button,
+.clean button,
+.clean input[type="submit"],
+.clean input[type="reset"],
+.clean input[type="button"] {
+  /* display: inline-block; */
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 0.7em;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin: 5px;
+}
+.clean span.tag:hover,
+.clean .button:hover,
+.clean button:hover,
+.clean input[type="submit"]:hover,
+.clean input[type="reset"]:hover,
+.clean input[type="button"]:hover,
+.clean .button:focus,
+.clean button:focus,
+.clean input[type="submit"]:focus,
+.clean input[type="reset"]:focus,
+.clean input[type="button"]:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0;
+}
+.clean nav input[type="button"],
+.clean form .content input[type="button"] {
+  margin: auto 3px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+  border: none;
+  height: 3em;
+  line-height: inherit;
+  padding: 0px;
+}
+.clean #breaker {
+  display: none;
+}
+.clean .toc *:hover {
+  color: #a5774d;
+}

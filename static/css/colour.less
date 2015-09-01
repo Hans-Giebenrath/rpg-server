@@ -1,0 +1,256 @@
+@DarkRed : #6C2412;
+@DarkGold: #BEA008;
+@DarkerGold: #6C2412;
+@LightGold: #DDC342;
+@BorderColor : black;
+@LightYellow: #FFFFE9;
+@InnerNavColor: white;
+@OuterNavColor: @DarkRed;
+@LinkHoverColor: #A5774D;
+@style: "colour";
+
+.bottom_bordered() {
+	border-bottom: 1px solid @BorderColor;
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+.colour {
+	@import (multiple,less) "all_files.less";
+
+	th, .header {
+		color: @LightGold;
+		background-color: @DarkRed;
+		font-weight: bold;
+	}
+
+	#pane > * {
+		padding : 2em;
+		padding-top: 0.4em;
+		border-top: none;
+		background-color: white;
+	}
+
+	.summary {
+		border: 1px solid @DarkGold;
+		margin: 0 0 1em 1em;
+		background-color: white;
+	}
+
+	.summary > * {
+		padding: 0 0.333333em;
+	}
+	
+	.tooltip:after {
+		border-left: 2px solid grey;
+		border-right: none;
+	}
+
+	div.priv {
+		padding: 1em;
+	}
+
+	.summary .content :first-child
+	{
+		margin-top: 0.35em;
+	}
+
+	.summary .content :last-child
+	{
+		margin-bottom: 0.35em;
+	}
+
+	form {
+		border: 1px solid @BorderColor;
+		box-shadow: 0 0 20px 5px @DarkRed;
+	}
+
+	form > *
+	{
+		padding: 0; 
+	}
+
+	td, th
+	{
+		padding: 0.333333em;
+	}
+
+	table, tr, td, th
+	{
+		border: 1px solid #bea008;
+		border-collapse: collapse;
+	}
+
+	tr:nth-child(even)
+	{
+		background-color: white;
+	}
+
+	tr:nth-child(odd)
+	{
+		background-color: #ffffe9;
+	}
+
+	.btn-container > * {
+		margin: 0.35em;
+		margin-top:  0.7em;
+	}
+
+	input[type="email"],
+	input[type="number"],
+	input[type="search"],
+	input[type="text"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="password"],
+	textarea,
+	select {
+		height: 3em;
+		padding: 0.58em 0.97em;
+		background-color: white;
+		border: 1px solid #D1D1D1;
+		border-radius: 4px;
+		box-shadow: none;
+		box-sizing: border-box;
+	}
+
+	/* Removes awkward default styles on some inputs for iOS */
+	input[type="email"],
+	input[type="number"],
+	input[type="search"],
+	input[type="text"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="password"],
+	textarea {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+	}
+	textarea {
+		min-height: 65px;
+		padding-top: 6px;
+		padding-bottom: 6px;
+	}
+
+	input[type="email"]:focus,
+	input[type="number"]:focus,
+	input[type="search"]:focus,
+	input[type="text"]:focus,
+	input[type="tel"]:focus,
+	input[type="url"]:focus,
+	input[type="password"]:focus,
+	textarea:focus,
+	select:focus {
+		border: 1px solid #33C3F0;
+		outline: 0;
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		/* display: inline; it was useful for something ...*/ 
+	}
+
+	h1 {
+		font-weight: normal;
+		font-size: 1.2em;
+		color: #bea008;   
+		border-bottom: 1px solid #bea008;
+	}
+
+	h2 {
+		font-weight: normal;
+		font-size: 1.1em;
+		color: #bea008;   
+		width: 75%;
+		border-bottom: 1px solid #bea008;
+	}
+
+	h3 {
+		font-weight: normal;
+		font-size: 0.95em;
+		color: #bea008;   
+		width: 25%;
+		border-bottom: 1px dotted #bea008;
+	}
+
+	h4 {
+		font-weight: normal;
+		color: #bea008;
+	}
+
+	h5 {
+		display: inline-block;
+		margin-right: 1em;
+		color: #bea008;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+
+	h6 {
+		display: inline-block;
+		margin-right: 0.27em;
+		color: #bea008;
+		font-style: italic;
+	}
+
+	h6:after {
+		content: ":";
+	}
+
+	span.tag,
+	.button,
+	button,
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"] {
+		height: 1.5em;
+		padding: 0 1em;
+		line-height: 1.3em;
+		color: @LightGold;
+		text-align: center;
+		text-decoration: none;
+		white-space: nowrap;
+		background-color: @DarkRed;
+		border: 1px solid black;
+		cursor: pointer;
+		box-sizing: border-box; 
+		font-family: 'Ubuntu' monospace;
+		font-size: 1em;
+	}
+	span.tag:hover,
+	.button:hover,
+	button:hover,
+	input[type="submit"]:hover,
+	input[type="reset"]:hover,
+	input[type="button"]:hover,
+	.button:focus,
+	button:focus,
+	input[type="submit"]:focus,
+	input[type="reset"]:focus,
+	input[type="button"]:focus {
+		color: @DarkRed;
+		background-color: @LightYellow;
+	outline: 0; }
+
+	nav input[type="button"], form .content input[type="button"]
+	{
+		margin: auto 3px;
+		cursor: pointer;
+		display: inline-block;
+		text-align: right;
+		vertical-align: top;
+		border: none;
+	}
+
+	.toc *:hover {
+		color: @LinkHoverColor;
+	}
+}
+
+body.colour {
+	background-color: Ivory;
+	margin-top: 0;
+	box-shadow: 0 0 20px 5px @DarkRed;
+}

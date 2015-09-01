@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta name="viewport" content="width=device-width" />
+		<link href="static/image/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<script>
+			var dojoConfig = {
+				paths : {
+					rpg : "../"
+					// dgrid : "../dgrid"
+				},
+				async : true
+			};
+
+			var rpgConfig = {
+				do_login : true
+			};
+			// using this later for ws.js
+			if (typeof String.prototype.endsWith !== 'function') {
+				String.prototype.endsWith = function(suffix) {
+					return this.indexOf(suffix, this.length - suffix.length) !== -1;
+				};
+			}
+			if (typeof String.prototype.startsWith !== 'function') {
+				String.prototype.startsWith = function(suffix) {
+					return this.indexOf(suffix) == 0;
+				};
+			}
+			function launchFullScreen(element) {
+				if (element.requestFullscreen)
+				{ element.requestFullscreen(); }
+				else if (element.mozRequestFullScreen)
+				{ element.mozRequestFullScreen(); }
+				else if (element.webkitRequestFullscreen)
+				{ element.webkitRequestFullscreen(); }
+				else if (element.msRequestFullscreen)
+				{ element.msRequestFullscreen(); }
+			}
+			function cancelFullScreen() {
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+				} else if (document.mozCancelFullScreen) {
+					document.mozCancelFullScreen();
+				} else if (document.webkitExitFullscreen) {
+					document.webkitExitFullscreen();
+				} else if (document.msExitFullscreen) {
+					document.msExitFullscreen();
+				}
+			}
+			function assert(condition, message) {
+				if (!condition) {
+					message = message || "Assertion failed";
+					if (typeof Error !== "undefined") {
+						throw new Error(message);
+					}
+					throw message; // Fallback
+				}
+			}
+		</script>
+		<!-- <script src="static/js/markdown-it.js"></script> -->
+		<script src="/static/js/marked.js"></script>
+		<script src="/static/js/dojo/dojo.js"></script>
+		<!-- <script src="/static/js/test.js"></script> -->
+		<!-- <script src="/static/js/parselinks.js"></script> -->
+		<script src="/static/js/char.js"></script>
+		<script src="/static/js/gallery.js"></script>
+		<script src="/static/js/nav.js"></script>
+		<script src="/static/js/history.js"></script>
+		<script src="/static/js/wiki.js"></script>
+		<script src="/static/js/group.js"></script>
+		<script src="/static/js/theme.js"></script>
+		<script src="/static/js/mobile.js"></script>
+		<script src="/static/js/appointment.js"></script>
+		<link href="/static/css/ovo.css" rel="stylesheet" type="text/css">
+		<link href="/static/css/style.css" type="text/css" rel="stylesheet">
+		<link href="/static/css/mobile.css" type="text/css" rel="stylesheet" media="(max-width: 45em)" />
+		
+	</head>
+	<body class="colour">
+		<div id="modal"></div>
+		<div id="content" class="hidden">
+			<div id="top">
+				<nav id="mobile-sidebar" class="hidden">
+					<label for="all-my-roles-cb">I</label>
+					<label for="this-group-cb">G</label>
+					<label for="misc-cb">&#9881;</label>
+				</nav>
+				<nav id="role-nav"> <!-- move after first register to the end -->
+					<input type="checkbox" class="hidden" id="all-my-roles-cb" />
+					<div id="all-my-roles">
+						<span>All my roles</span>
+						<div class="lvl1">
+							<div>
+								<span class="lvl2">My Chars</span>
+								<div id="own-characters-list"></div>
+							</div>
+							<div>
+								<span class="lvl2">My Groups</span>
+								<div id="own-gms-list"></div>
+							</div>
+							<div class="leftright">
+								<input type="text" placeholder="New Group Name" id="new-group-name" />
+								<input type="button" value="Create Group" id="create-group" />
+							</div>
+						</div>
+					</div>
+					<input type="checkbox" class="hidden" id="this-group-cb" />
+					<div id="this-group">
+						<span>This group</span>
+						<div class="lvl1">
+							<div>
+								<span class="lvl2">Chars</span>
+								<div id="group-chars-list"></div>
+								<div id="add-char" class="selectable">+ Add Char 2 Grp</div>
+							</div>
+							<div>
+								<span class="lvl2">GMs</span>
+								<div id="group-gms-list"></div>
+								<div id="add-gm" class="selectable">+ Add GM 2 Grp</div>
+							</div>
+						</div>
+					</div>
+					<input type="checkbox" class="hidden" id="misc-cb" />
+					<div id="misc">
+						<span>Misc</span>
+						<div class="lvl1">
+							<div>
+								<span id="switch-theme">Switch theme</span>
+							</div>
+							<div>
+								<span id="logout" class="lvl2 selectable">Logout</span>
+							</div>
+							<div>
+								<span class="lvl2">Appointments</span>
+								<div id="appointments"></div>
+								<div class="leftright">
+									<input type="text" placeholder="New Date" id="appointment-date" />
+									<input type="button" value="Add Date" id="appointment-propose" />
+								</div>
+								<div id="appointment-clear" class="selectable">- Clear Appointments</div>
+							</div>
+							<div>
+								<span id="user-edit" class="lvl2 selectable">Modify Your Account</span>
+							</div>
+							<div>
+								<span id="user-delete" class="lvl2 selectable">Delete Your Account</span>
+							</div>
+						</div>
+					</div>
+				</nav>
+				<div id="logo">
+					<img src="/static/image/RPGLOGO.png" alt="Whackawacka" width="436" height="125px"></img>
+				</div>
+			</div>
+			<!-- using iconClass for icons (later) -->
+			<nav id="play-nav">
+				<span id="play-nav-gallery" class="selectable" data-rpg-target="gallery">Gallery</span>
+				<span id="play-nav-history" class="selectable" data-rpg-target="history">history</span>
+				<span id="play-nav-wiki" class="selectable" data-rpg-target="wiki">Wiki</span>
+			</nav>
+			<div id="breaker">&nbsp;</div>
+			<div id="pane">
+				<div id="char-pane">
+					<div class="btn-container">
+						<input type="button" class="edit" id="char-edit" value="Edit Character" />
+					</div>
+					<h1 id="char-name" class="title"></h1>
+					<img alt="Character Image" id="char-profile">
+					<div id="char-summary" class="summary">
+						<div class="header">Summary</div>
+						<div class="content"></div>
+					</div>
+					<div id="char-content"></div>
+					<div id="char-gallery" class="gallery-cont"></div>
+				</div>
+				<div id="gallery-pane">
+					<div id="group-gallery" class="gallery-cont"></div>
+				</div>
+				<div id="history-pane">
+					<div id="history-btns"></div>
+					<div id="history-placeholder">
+						<h1 class="title">Welcome to the history view!</h1>
+						<div class="summary">
+							<div class="header">Summary</div>
+							<div><p>Here one can see, what happened in your world in chronological order.</p></div>
+						</div>
+						<div class="content"><p>Currently, there is no history created, yet. Any GM in this group is allowed to become chronologist and append heroical stuff.</p></div>
+					</div>
+					<div id="history-content" class="hidden">
+						<div id="history-timelist"></div>
+						<div id="history-detail"></div>
+					</div>
+
+				</div>
+				<div id="wiki-pane">
+					<div id="wiki-overview">
+						<div class="btn-container">
+							<input type="button" class="add" id="wiki-overview-add" value="New Wikisite" />
+						</div>
+						<div id="wiki-overview-tags"></div>
+						<table id="wiki-grid">
+							<colgroup></colgroup>
+							<thead></thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div id="wiki-view">
+						<div class="btn-container"> <!-- TODO because of changing permissions, it may is more easy to keep track of -->
+							<input type="button" class="add" id="wiki-view-add" value="New Wikisite" />
+							<input type="button" class="edit" id="wiki-view-edit" value="Edit" />
+							<input type="button" vlass="delete" id="wiki-view-delete" value="Delete" /></div>
+						<h1 id="wiki-view-title" class="title"></h1>
+						<div id="wiki-view-summary" class="summary">
+							<div class="header">Summary</div>
+							<div class="content"></div>
+						</div>
+						<div id="wiki-view-content"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="hidden-zone" class="hidden">
+			<div id="user-selection-filter"></div>
+		</div>
+	</body>
+</html>

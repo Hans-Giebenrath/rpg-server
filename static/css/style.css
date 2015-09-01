@@ -1,0 +1,1106 @@
+/* Stressed */
+.selected,
+th,
+.header,
+label,
+legend,
+.elected,
+.emph,
+.selected + * > .info {
+  font-weight: bold;
+}
+table {
+  width: 100%;
+}
+nav,
+.gallery .pic,
+.tag,
+#wiki-grid thead {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+}
+nav.stick {
+  position: fixed;
+  top: 0;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline;
+}
+.selectable {
+  cursor: pointer;
+}
+.leftright {
+  display: flex;
+  justify-content: space-between;
+}
+#hidden-zone,
+.hidden,
+input[type="checkbox"].hidden,
+input[type="radio"].hidden {
+  display: none;
+}
+#notification-bar {
+  display: block;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  max-width: 1250px;
+  font-size: 1.5em;
+  line-height: 1.6;
+  font-weight: 400;
+  margin: 8px auto;
+}
+#pane > * {
+  display: none;
+  max-width: 100%;
+  font-family: 'Ovo', sans-serif;
+}
+#pane > .selected {
+  display: block;
+  min-height: 10em;
+  font-weight: inherit;
+}
+.asc:after,
+.desc:after {
+  content: ' ';
+  position: relative;
+  left: 10px;
+  border: 8px solid transparent;
+}
+.asc:after {
+  top: 10px;
+  border-top-color: silver;
+}
+.desc:after {
+  bottom: 15px;
+  border-bottom-color: silver;
+}
+dt:after {
+  content: ":";
+}
+dt {
+  font-style: italic;
+}
+dd {
+  margin-bottom: 0.5em;
+}
+.summary {
+  width: 30em;
+  max-width: 100%;
+  float: right;
+}
+.summary {
+  margin: 0 0 1em 1em;
+}
+div.priv {
+  border-left: 2px solid red;
+  background-color: #ffe8e8;
+}
+span.priv {
+  font-style: italic;
+  color: red;
+}
+span.priv:before {
+	content: ' ';
+}
+.priv .summary {
+  border: 1px solid red;
+}
+.priv *:first-child {
+  margin-top: 0;
+}
+.priv *:last-child {
+  margin-bottom: 0;
+}
+.summary .header {
+  text-align: center;
+}
+table,
+tr,
+td,
+th {
+  border-collapse: collapse;
+}
+.toc {
+  margin-left: 1em;
+}
+.toc *:before {
+  content: attr(data-num) ' ';
+}
+.toc .lvl2 {
+  padding-left: 1em;
+}
+.toc .lvl3 {
+  padding-left: 2em;
+}
+.toc .lvl4 {
+  padding-left: 3em;
+}
+.toc .lvl5 {
+  padding-left: 4em;
+}
+.toc .lvl6 {
+  padding-left: 5em;
+}
+.tooltip {
+  position: relative;
+  text-decoration: none;
+}
+.tooltip:after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%;
+  left: 20%;
+  white-space: nowrap;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+.tooltip:hover:after {
+  bottom: 100%;
+}
+.tooltip:hover:after {
+  opacity: 1;
+}
+.permission-select > div {
+  display: flex;
+  padding: 0.13em;
+  border: none;
+}
+.permission-select > div > span {
+  display: inline-block;
+  text-align: left;
+  width: 11em;
+}
+.permission-select > div > select {
+  display: inline-block;
+  max-width: 15em;
+  min-width: 1em;
+}
+input[type="button"].hidden {
+  display: none;
+}
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+}
+form .btn-container {
+  justify-content: center;
+}
+.btn-container > *:last-child {
+  margin-right: 0px;
+}
+.btn-container > *:first-child {
+  margin-left: 0px;
+}
+/*
+ * Appointment
+ */
+/* #appointments {*/
+.date.tooltip:after {
+  content: 'Voted by: ' attr(data-tooltip);
+}
+.date.tooltip:hover:after {
+  bottom: 00%;
+  right: calc(101.3%);
+  display: block;
+  left: inherit;
+}
+.date.tooltip:after {
+  display: none;
+  left: inherit;
+}
+/*
+ * Wiki
+ */
+#wiki-overview col.title {
+  width: 30%;
+}
+#wiki-overview col.short {
+  width: 70%;
+}
+#wiki-overview div.tag:before {
+  content: "Tags: ";
+  font-weight: bold;
+  vertical-align: middle;
+}
+span.tag {
+  display: inline-block;
+}
+/*
+ * History
+ */
+#history-content {
+  display: flex;
+}
+#history-detail {
+  flex: 4 2 20em;
+  margin-left: 10px;
+}
+#history-detail .date-ingame:before,
+#history-detail .date-outgame:before {
+  font-style: normal;
+  font-weight: bold;
+  display: inline-block;
+  width: 5em;
+}
+#history-detail .date-ingame:before {
+  content: "Ingame: ";
+}
+#history-detail .date-outgame:before {
+  content: "Outgame: ";
+}
+#history-timelist {
+  flex: 1 1 10em;
+  margin-right: 10px;
+}
+#history-timelist .date-ingame:before {
+  content: "IG: ";
+}
+#history-timelist .date-outgame:before {
+  content: "OG: ";
+}
+#history-timelist .date-ingame:before,
+#history-timelist .date-outgame:before {
+  display: inline-block;
+  font-weight: bold;
+  width: 2.3em;
+}
+#history-timelist input[type=button] {
+  width: 50%;
+}
+#history-timelist .title {
+  margin-bottom: 0;
+}
+#history-timelist > * {
+  margin: 15px auto;
+  margin-right: 10px;
+  padding-bottom: 15px;
+}
+.history-detail-entry > .content {
+  display: block;
+  min-height: 8em;
+}
+/*
+ * Char
+ */
+#char-gallery {
+  margin-top: 1em;
+  padding-top: 1em;
+}
+#char-content {
+  min-height: 8em;
+  display: block;
+}
+/*
+ * Gallery
+ */
+.gallery {
+  padding: 10px;
+}
+.gallery-info {
+  min-height: 200px;
+}
+.gallery-info img {
+  float: left;
+  margin-right: 15px;
+}
+#modal {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  /* background-color: #fff; */
+}
+#modal.hidden {
+  display: none;
+}
+#modal .small {
+  max-width: 25em;
+  min-width: 0;
+}
+#modal form {
+  background-color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+#modal form ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#modal > * {
+  width: 65%;
+  max-width: 60em;
+  min-width: 25em;
+  text-align: center;
+}
+#modal label {
+  min-width: 30%;
+  text-align: left;
+}
+#modal label + input {
+  width: 100%;
+}
+#modal label + textarea {
+  width: 100%;
+  display: block;
+  height: 24em;
+}
+#modal label + textarea.short {
+  height: 10em;
+}
+#modal .entry {
+  margin: 0.4em;
+}
+#modal .btn-container {
+  padding: 4px;
+}
+#modal #all-my-roles {
+  text-align: left;
+}
+#modal #all-my-roles * {
+  padding: 1px;
+}
+#modal #all-my-roles > span {
+  display: none;
+}
+#modal #all-my-roles .lvl2 {
+  font-size: 1.2em;
+}
+#modal #all-my-roles .lvl3 {
+  padding-left: 1em;
+}
+/*
+ * Nav
+ */
+#logo {
+  padding-top: 7px;
+  margin-bottom: 7px;
+  text-align: center;
+}
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.2em;
+  z-index: 1;
+  font-family: 'Ubuntu', sans-serif;
+  font-variant: small-caps;
+}
+nav > * {
+  width: 25%;
+  position: relative;
+}
+#role-nav > div > span,
+#play-nav span {
+  display: block;
+  text-align: center;
+}
+#role-nav > div > div {
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 50;
+}
+#role-nav > div:hover > div {
+  display: block;
+}
+#role-nav .lvl2 ~ * > div,
+#all-my-roles .lvl2 ~ * > div {
+  display: flex;
+  justify-content: space-between;
+}
+#role-nav .lvl2 ~ * {
+  padding-left: 1em;
+}
+.info:before {
+  content: '(';
+}
+.info:after {
+  content: ')';
+}
+/*
+ * Slider
+ */
+.imgslider {
+  margin-top: 1em;
+  min-height: 100vh;
+}
+.imgslider .orderable {
+  max-height: 90vh;
+  margin-top: 5vh;
+  overflow-y: auto;
+  padding-right: 30px;
+}
+.imgslider .orderable .bg {
+  width: 200px;
+  display: flex;
+}
+.imgslider .orderable .pic {
+  display: flex;
+}
+.imgslider .orderable .pic img {
+  margin: auto;
+}
+.imgslider .orderable-row {
+  margin-bottom: 5px;
+}
+.image-collection {
+  margin-left: 1em;
+}
+.image-collection .slider-element > input[type=radio] {
+  display: none;
+}
+.image-collection .slider-element {
+  border: none;
+}
+.image-collection .slider-element > * {
+  display: none;
+}
+.image-collection .slider-element > input:checked + div {
+  display: block;
+}
+.image-collection label {
+  position: relative;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 4em;
+  padding: 240px 25px;
+  display: block;
+}
+.image-collection .bg {
+  width: 600px;
+  height: 600px;
+  display: flex;
+  /* align-items: center;*/
+}
+.image-collection .pic {
+  display: flex;
+  /* justify-content: center;*/
+  margin-bottom: 2em;
+}
+.image-collection .pic img {
+  margin: auto;
+}
+img[src=""],
+div:empty {
+  display: none;
+}
+div.rotate {
+  transform: rotate(-90deg);
+}
+th.rotate {
+  border: none;
+  height: 4.6em;
+  background-color: white;
+  color: black;
+  padding: 0.2em;
+}
+
+.colour {
+  /* Removes awkward default styles on some inputs for iOS */
+}
+.colour #appointments .entry {
+  padding-bottom: 0.125em;
+}
+.colour #appointments .elected {
+  font-weight: bold;
+}
+.colour #appointments .tooltip:after {
+  content: 'Voted by: ' attr(data-tooltip);
+}
+.colour #appointments .tooltip:hover:after {
+  bottom: 00%;
+  right: calc(101.3%);
+  display: block;
+  left: inherit;
+  padding: 0.2em 0.2em 0.3em 1em;
+  margin: -0.3em;
+  /* I have no idea, where it comes from. */
+  margin-right: 1em;
+}
+.colour #appointments .tooltip:after {
+  display: none;
+  left: inherit;
+}
+.colour #char-gallery {
+  margin-top: 1em;
+  border-top: 1px solid black;
+  padding-top: 1em;
+}
+.colour .gallery {
+  border-bottom: 1px solid black;
+}
+.colour .gallery:last-child {
+  border-bottom: none;
+}
+.colour #modal .header {
+  border-bottom: 3px solid;
+}
+.colour #modal #all-my-roles * {
+  padding: 1px;
+}
+.colour #modal #all-my-roles > span {
+  display: none;
+}
+.colour #modal #all-my-roles .lvl3 {
+  padding-left: 1em;
+}
+.colour nav *,
+.colour nav .tooltip:after {
+  background-color: white;
+}
+.colour #role-nav {
+  color: white;
+  background-color: #6c2412;
+}
+.colour #role-nav input.delete {
+  min-width: inherit;
+}
+.colour #role-nav > div > span {
+  display: block;
+  padding-bottom: 0.2em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  text-align: center;
+  background-color: #6c2412;
+}
+.colour #role-nav > div > div {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  border-top: none;
+  padding: 0 0.2em 0.2em 0.2em;
+}
+.colour #role-nav .lvl2 ~ * {
+  padding-left: 1em;
+}
+.colour #play-nav > * {
+  padding: 0.4em 0 0.6em 0;
+  display: inline-block;
+  color: #bea008;
+  background-color: #6c2412;
+  border: 1px solid black;
+  border-bottom: none;
+  width: 20%;
+  text-align: center;
+}
+.colour #play-nav {
+  box-shadow: inset 0px -25px 20px -20px #6c2412;
+}
+.colour #play-nav > .selected {
+  z-index: 3;
+  border-bottom: none;
+  background-color: #ffffe9;
+  font-weight: normal;
+}
+.colour #breaker {
+  border: 1px solid black;
+  background-color: #6c2412;
+  height: 1.5em;
+}
+.colour #wiki-overview-tags span {
+  margin: 3px 6px;
+}
+.colour .tag.selected {
+  background-color: #ffffe9;
+}
+.colour .tag > * {
+  background-color: gainsboro;
+  padding: 3px;
+  border: 1px solid black;
+  display: inline-block;
+}
+.colour .tag,
+.colour #wiki-grid thead {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+}
+.colour #wiki-view {
+  position: relative;
+}
+.colour #wiki-overview-add {
+  margin-bottom: 10px;
+}
+.colour #wiki-view-title {
+  font-size: 2.2em;
+}
+.colour th,
+.colour .header {
+  color: #ddc342;
+  background-color: #6c2412;
+  font-weight: bold;
+}
+.colour #pane > * {
+  padding: 2em;
+  padding-top: 0.4em;
+  border-top: none;
+  background-color: white;
+}
+.colour .summary {
+  border: 1px solid #bea008;
+  margin: 0 0 1em 1em;
+  background-color: white;
+}
+.colour .summary > * {
+  padding: 0 0.333333em;
+}
+.colour .tooltip:after {
+  border-left: 2px solid grey;
+  border-right: none;
+}
+.colour div.priv {
+  padding: 1em;
+}
+.colour .summary .content :first-child {
+  margin-top: 0.35em;
+}
+.colour .summary .content :last-child {
+  margin-bottom: 0.35em;
+}
+.colour form {
+  border: 1px solid black;
+  box-shadow: 0 0 20px 5px #6c2412;
+}
+.colour form > * {
+  padding: 0;
+}
+.colour td,
+.colour th {
+  padding: 0.333333em;
+}
+.colour table,
+.colour tr,
+.colour td,
+.colour th {
+  border: 1px solid #bea008;
+  border-collapse: collapse;
+}
+.colour tr:nth-child(even) {
+  background-color: white;
+}
+.colour tr:nth-child(odd) {
+  background-color: #ffffe9;
+}
+.colour .btn-container > * {
+  margin: 0.35em;
+  margin-top: 0.7em;
+}
+.colour input[type="email"],
+.colour input[type="number"],
+.colour input[type="search"],
+.colour input[type="text"],
+.colour input[type="tel"],
+.colour input[type="url"],
+.colour input[type="password"],
+.colour textarea,
+.colour select {
+  height: 3em;
+  padding: 0.58em 0.97em;
+  background-color: white;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+.colour input[type="email"],
+.colour input[type="number"],
+.colour input[type="search"],
+.colour input[type="text"],
+.colour input[type="tel"],
+.colour input[type="url"],
+.colour input[type="password"],
+.colour textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.colour textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.colour input[type="email"]:focus,
+.colour input[type="number"]:focus,
+.colour input[type="search"]:focus,
+.colour input[type="text"]:focus,
+.colour input[type="tel"]:focus,
+.colour input[type="url"]:focus,
+.colour input[type="password"]:focus,
+.colour textarea:focus,
+.colour select:focus {
+  border: 1px solid #33C3F0;
+  outline: 0;
+}
+.colour input[type="checkbox"],
+.colour input[type="radio"] {
+  /* display: inline; it was useful for something ...*/
+}
+.colour h1 {
+  font-weight: normal;
+  font-size: 1.2em;
+  color: #bea008;
+  border-bottom: 1px solid #bea008;
+}
+.colour h2 {
+  font-weight: normal;
+  font-size: 1.1em;
+  color: #bea008;
+  width: 75%;
+  border-bottom: 1px solid #bea008;
+}
+.colour h3 {
+  font-weight: normal;
+  font-size: 0.95em;
+  color: #bea008;
+  width: 25%;
+  border-bottom: 1px dotted #bea008;
+}
+.colour h4 {
+  font-weight: normal;
+  color: #bea008;
+}
+.colour h5 {
+  display: inline-block;
+  margin-right: 1em;
+  color: #bea008;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.colour h6 {
+  display: inline-block;
+  margin-right: 0.27em;
+  color: #bea008;
+  font-style: italic;
+}
+.colour h6:after {
+  content: ":";
+}
+.colour span.tag,
+.colour .button,
+.colour button,
+.colour input[type="submit"],
+.colour input[type="reset"],
+.colour input[type="button"] {
+  height: 1.5em;
+  padding: 0 1em;
+  line-height: 1.3em;
+  color: #ddc342;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: #6c2412;
+  border: 1px solid black;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-family: 'Ubuntu' monospace;
+  font-size: 1em;
+}
+.colour span.tag:hover,
+.colour .button:hover,
+.colour button:hover,
+.colour input[type="submit"]:hover,
+.colour input[type="reset"]:hover,
+.colour input[type="button"]:hover,
+.colour .button:focus,
+.colour button:focus,
+.colour input[type="submit"]:focus,
+.colour input[type="reset"]:focus,
+.colour input[type="button"]:focus {
+  color: #6c2412;
+  background-color: #ffffe9;
+  outline: 0;
+}
+.colour nav input[type="button"],
+.colour form .content input[type="button"] {
+  margin: auto 3px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+  border: none;
+}
+.colour .toc *:hover {
+  color: #a5774d;
+}
+body.colour {
+  background-color: Ivory;
+  margin-top: 0;
+  box-shadow: 0 0 20px 5px #6c2412;
+}
+
+.clean {
+  /* Removes awkward default styles on some inputs for iOS */
+}
+.clean #appointments > .entry {
+  padding-bottom: 0.125em;
+}
+.clean .date.tooltip:hover:after {
+  margin-bottom: 0.35em;
+  padding: 0.2em 1em;
+}
+.clean #char-gallery {
+  border-top: 1px solid #e1e1e1;
+}
+.clean .gallery {
+  border-bottom: 1px solid #e1e1e1;
+}
+.clean .gallery:last-child {
+  border-bottom: none;
+}
+.clean #history-timelist > .orderable-row {
+  border-bottom: 1px solid #e1e1e1;
+}
+.clean #history-timelist > .orderable-row:last-child {
+  border-bottom: none;
+}
+.clean .history-detail-entry {
+  border-bottom: 1px solid #e1e1e1;
+  margin-top: 1em;
+}
+.clean .history-detail-entry:last-child {
+  border-bottom: none;
+}
+.clean nav {
+  border-bottom: 1px solid #e1e1e1;
+  border-top: 1px solid #e1e1e1;
+}
+.clean nav *,
+.clean nav .tooltip:after {
+  background-color: #f5f5f5;
+}
+.clean nav,
+.clean nav > *,
+.clean nav > * :first-child {
+  background-color: #f5f5f5;
+}
+.clean #role-nav > div > span,
+.clean #play-nav span {
+  padding: 0.5em;
+  padding-bottom: 0.7em;
+}
+.clean #role-nav > div > div {
+  color: black;
+  border: 1px solid #e1e1e1;
+  border-top: none;
+  padding: 0 1em 1em 1em;
+  border-radius: 0 0 8px 8px;
+}
+.clean span.tag.selected {
+  color: white;
+  background-color: #33c3f0;
+  border-color: #33c3f0;
+}
+.clean span.tag.selected:hover {
+  background-color: #1eaedb;
+  border-color: #1eaedb;
+}
+.clean #pane > * {
+  padding: 2em;
+  padding-top: 0.4em;
+  border-top: none;
+  background-color: white;
+}
+.clean .summary,
+.clean .tooltip:after {
+  border-left: 2px solid grey;
+  border-right: none;
+  background-color: #f5f5f5;
+}
+.clean div.priv {
+  padding: 1em;
+}
+.clean .summary .content :first-child {
+  margin-top: 0.35em;
+}
+.clean .summary .content :last-child {
+  margin-bottom: 0.35em;
+}
+.clean .summary > *,
+.clean form > * {
+  margin: 0.8em 1em;
+  padding: 0;
+}
+.clean form {
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+.clean td,
+.clean th {
+  padding: 0.8em 1em;
+}
+.clean table,
+.clean tr,
+.clean td,
+.clean th {
+  border-bottom: 1px solid #e1e1e1;
+  text-align: left;
+  color: black;
+  background-color: white;
+}
+.clean .btn-container > * {
+  margin: 0.35em;
+  margin-top: 0.7em;
+}
+.clean input[type="email"],
+.clean input[type="number"],
+.clean input[type="search"],
+.clean input[type="text"],
+.clean input[type="tel"],
+.clean input[type="url"],
+.clean input[type="password"],
+.clean textarea,
+.clean select {
+  height: 3em;
+  padding: 0.58em 0.97em;
+  background-color: white;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+.clean input[type="email"],
+.clean input[type="number"],
+.clean input[type="search"],
+.clean input[type="text"],
+.clean input[type="tel"],
+.clean input[type="url"],
+.clean input[type="password"],
+.clean textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.clean textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.clean input[type="email"]:focus,
+.clean input[type="number"]:focus,
+.clean input[type="search"]:focus,
+.clean input[type="text"]:focus,
+.clean input[type="tel"]:focus,
+.clean input[type="url"]:focus,
+.clean input[type="password"]:focus,
+.clean textarea:focus,
+.clean select:focus {
+  border: 1px solid #33C3F0;
+  outline: 0;
+}
+.clean h1,
+.clean h2,
+.clean h3,
+.clean h4,
+.clean h5,
+.clean h6 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+.clean h1 {
+  font-size: 4.0rem;
+  line-height: 1.2;
+  letter-spacing: -0.1rem;
+}
+.clean h2 {
+  font-size: 3.6rem;
+  line-height: 1.25;
+  letter-spacing: -0.1rem;
+}
+.clean h3 {
+  font-size: 3.0rem;
+  line-height: 1.3;
+  letter-spacing: -0.1rem;
+}
+.clean h4 {
+  font-size: 2.4rem;
+  line-height: 1.35;
+  letter-spacing: -0.08rem;
+}
+.clean h5 {
+  font-size: 1.8rem;
+  line-height: 1.5;
+  letter-spacing: -0.05rem;
+}
+.clean h6 {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+.clean span.tag,
+.clean .button,
+.clean button,
+.clean input[type="submit"],
+.clean input[type="reset"],
+.clean input[type="button"] {
+  /* display: inline-block; */
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 0.7em;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin: 5px;
+}
+.clean span.tag:hover,
+.clean .button:hover,
+.clean button:hover,
+.clean input[type="submit"]:hover,
+.clean input[type="reset"]:hover,
+.clean input[type="button"]:hover,
+.clean .button:focus,
+.clean button:focus,
+.clean input[type="submit"]:focus,
+.clean input[type="reset"]:focus,
+.clean input[type="button"]:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0;
+}
+.clean nav input[type="button"],
+.clean form .content input[type="button"] {
+  margin: auto 3px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+  border: none;
+  height: 3em;
+  line-height: inherit;
+  padding: 0px;
+}
+.clean #breaker {
+  display: none;
+}
+.clean .toc *:hover {
+  color: #a5774d;
+}
+

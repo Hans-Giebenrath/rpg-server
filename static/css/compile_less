@@ -1,0 +1,3 @@
+#!/bin/bash
+
+lessc shared.less shared.css && lessc colour.less colour.css && lessc clean.less clean.css && lessc style.less style.css && lessc mobile.less mobile.css
