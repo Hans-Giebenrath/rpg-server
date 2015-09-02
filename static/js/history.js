@@ -90,7 +90,7 @@ require(["dojo/dom",
 		};
 	})(); // }}}
 	var history_create_modal = (function () { // {{{
-		var m = modal("Create a new Wikisite", null, 
+		var m = modal("Create new History", null, 
 					  [
 						  { title : construct.toDom("<input type=\"text\" placeholder=\"Title for History\" />") },
 						  { date_ingame : construct.toDom("<input type=\"text\" placeholder=\"When did it happen ingame?\" />") },
