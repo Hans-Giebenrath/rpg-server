@@ -14,6 +14,7 @@
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>
 
 with Util; use Util;
+with Config;
 with Ada.Directories; use Ada.Directories;
 with GNAT.OS_Lib;  use GNAT.OS_Lib;
 with Ada.Containers; use Ada.Containers;
@@ -53,11 +54,10 @@ package body Image_Handling is
 				F : constant Integer := Random_Filename_T'First;
 				New_Path : constant String := Public_Image_Dir & Filename(F .. F + 1) & Dir_Separator & Filename(F + 2 .. F + 3);
 				New_Name : constant String := New_Path & Dir_Separator & Filename;
-				-- Executable : constant String := "./print_args";
-				Executable : constant String := "/usr/bin/convert";
+				Executable : constant String := Config.Image_Conversion_Script;
 				-- NOTE take care, that no spaces are in paths. Or escape with backslash.
-				Small_Command : constant String := Executable & " " & Old_Name & " -resize 200x200 " & New_Name & ".small";
-				Medium_Command : constant String := Executable & " " & Old_Name & " -resize 600x600 " & New_Name & ".medium";
+				Small_Command : constant String := Executable & " " & Old_Name & " " & New_Name & ".small 200x200";
+				Medium_Command : constant String := Executable & " " & Old_Name & " " & New_Name & ".medium 600x600";
 				Args : Argument_List_Access;
 				Exit_Status : Integer;
 			begin
@@ -80,13 +80,10 @@ package body Image_Handling is
 				log("[image_resizer]", "Exit_Status:" & Integer'Image(Exit_Status), Debug);
 				Free(Args);
 
-				-- Rename (
-					-- Old_Name => Old_Name,
-					-- New_Name => New_Name & ".orig"
-				-- );
-				Copy_File (
-					Source_Name => Old_Name,
-					Target_Name => New_Name & ".orig"
+				Rename (
+				-- Copy_File (
+					Old_Name => Old_Name,
+					New_Name => New_Name & ".orig"
 				);
 			end;
 		end loop;
@@ -111,21 +108,21 @@ package body Image_Handling is
 			log("[delete_image]", "Deleting " & Name & ".orig", Debug);
 			Delete_File (Name & ".orig");
 		else
-			log("[delete_image]", "File " & Name & ".orig not found", Debug);
+			log("[delete_image]", "File " & Name & ".orig not found", warning);
 		end if;
 
 		if Exists (Name & ".small") then
 			log("[delete_image]", "Deleting " & Name & ".small", Debug);
 			Delete_File (Name & ".small");
 		else
-			log("[delete_image]", "File " & Name & ".small not found", Debug);
+			log("[delete_image]", "File " & Name & ".small not found", warning);
 		end if;
 
 		if Exists (Name & ".medium") then
 			log("[delete_image]", "Deleting " & Name & ".medium", Debug);
 			Delete_File (Name & ".medium");
 		else
-			log("[delete_image]", "File " & Name & ".medium not found", Debug);
+			log("[delete_image]", "File " & Name & ".medium not found", warning);
 		end if;
 	end;
 end;

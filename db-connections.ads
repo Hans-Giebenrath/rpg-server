@@ -26,7 +26,7 @@ package db.connections is
 			Post => initialized;
 		
 
-	-- TODO
+	-- TODO this would be cool for runtime configuration
 	-- procedure Increment_Number_of_Parallel_Connections;
 	-- procedure Decrement_Number_of_Parallel_Connections;
 	procedure Set_Number_Of_Parallel_Connections (Number_Of_Parallel_Connections : Natural);
@@ -38,12 +38,4 @@ package db.connections is
 
 	-- TODO Create callbacks to register, if a connection will be established
 	-- why? ...
-private
-	package connection_vectors is new vectors(
-		Index_Type => Natural,
-		Element_Type => PGconnection
-	);
-	use connection_vectors;
-
-	connections : connection_vectors.vector;
 end db.connections;

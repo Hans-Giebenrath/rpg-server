@@ -19,6 +19,14 @@ with Ada.Text_IO; use Ada.Text_IO;
 with util; use util;
 
 package body DB.Connections is
+	package connection_vectors is new vectors(
+		Index_Type => Natural,
+		Element_Type => PGconnection
+	);
+	use connection_vectors;
+
+	connections : connection_vectors.vector;
+
 	Connection_String : aliased access char_array;
 	Is_Initialized : Boolean := false;
 
@@ -36,6 +44,7 @@ package body DB.Connections is
 		function Get_Maximum_Connections return Natural;
 		function Get_Current_Connections return Natural;
 	private
+		-- Natural, as maybe one wants to cup all database connections for a while.
 		Maximum_Connections : Natural := 0;
 		Current_Connections : Natural := 0;
 	end Connection_Semaphore;
@@ -55,12 +64,12 @@ package body DB.Connections is
 			pragma Assert(Current_Connections > 0, "Trying to release connection in semaphore.");
 
 			Append(Connections, Connection);
-			-- decrease current connection count
 			Current_Connections := Current_Connections - 1;
 
 			log ("[Connection_Semaphore.Release_Connection] Current_Connections:", Natural'Image(Current_Connections), debug);
 		end Release_Connection;
 
+		-- Maximum_Connections can never decrease below 0.
 		entry Decrease_Connection_Count when Current_Connections < Maximum_Connections is
 			procedure PQfinish (Connection : PGconnection);
 			pragma Import (C, PQfinish, "PQfinish");
@@ -70,7 +79,6 @@ package body DB.Connections is
 				PQfinish(Connection);
 			end Call_PQfinish;
 		begin
-			pragma Assert(Maximum_Connections > 0, "Trying to decrease Maximum Connections below 0.");
 
 			-- close connection to database from last element
 			Query_Element(Connections, Natural(Length(Connections)), Call_PQfinish'Access);

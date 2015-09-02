@@ -61,9 +61,10 @@ package body Util is
 
 		SD : String(1..3);
 	begin
-		--if Log_Level >= Level then                                                   
-			--Put_Line(Prefix & Message);                                              
-		--end if; 
+		if Level > Log_Level then                                                   
+			return;
+		end if; 
+		
 		case Level is
 			when none => return;
 			when emergency => SD := SD_EMERG;

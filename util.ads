@@ -22,8 +22,9 @@ with AWS.Headers;
 
 package Util is
 	type Log_Level_Type is (none, emergency, alert, critical, error, warning, notice, info, debug);
-	Log_Level : Log_Level_Type := debug;
+	Log_Level : constant Log_Level_Type := debug;
 
+	-- used for ajax
 	function Exception_To_String (E : Ada.Exceptions.Exception_Occurrence; Prefix : String := "") return String;
 	procedure log (Prefix : String; Message : String; Level : Log_Level_Type);
 	procedure log_exception (E : Ada.Exceptions.Exception_Occurrence; Prefix : String; Level : Log_Level_Type := Error);

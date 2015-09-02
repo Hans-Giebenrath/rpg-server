@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Called" >> convertingscript.log
+
+# if [ "$1" = "test" ]; then
+	# exit 0
+# fi;
+
+/usr/bin/convert $1 -resize $3 $2 2> convertingscript.log

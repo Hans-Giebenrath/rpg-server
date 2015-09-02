@@ -46,6 +46,8 @@ with AWS.Net.SSL;
 with AWS.Mime;
 use AWS;
 
+with Config;--  use Config;
+
 with Ada.DIrectories; use Ada.Directories;
 
 with WebSocket;
@@ -58,65 +60,69 @@ with cb;
 
 procedure Server is
 
-   use Ada;
-   use AWS.Services;
+	use Ada;
+	use AWS.Services;
 
-   -- Rcp : Net.WebSocket.Registry.Recipient :=                                         
-	   -- Net.WebSocket.Registry.Create (URI => "/ws");
+	-- Rcp : Net.WebSocket.Registry.Recipient :=                                         
+		-- Net.WebSocket.Registry.Create (URI => "/ws");
 
-   Config : AWS.Config.Object := AWS.Config.Get_Current;
+	C : AWS.Config.Object := AWS.Config.Get_Current;
 begin
-	log("[server]", "Creating Paths", Debug);
+	log("[server]", "Creating Paths", Info);
 	Create_Path("private/image/pending");
 	Create_Path("private/image/confirmed");
 	Create_Path("static/image");
 
 	AWS.Config.Set.Session_Lifetime(86400.0);
+	AWS.Config.Set.Security_Mode(C, "TLSv1_2");
 	AWS.Mime.Add_Extension("svg", "image/svg+xml");
 
-	log("[server]", "Initializing database ...", Debug);
-	Init("user=rpg dbname=rpg host=localhost port=5432", 6);
+	log("[server]", "Initializing database connections ...", Info);
+	Init(
+		"user=" & Config.Psql_Username & 
+		" dbname=" & Config.Psql_Database &
+	    " host=" & Config.Psql_Hostname &
+	    " port=" & Config.Psql_Port, Config.Psql_Connections);
 
 	declare
 		WS : AWS.Server.HTTP;
-		Name : String := AWS.Config.Server_Name(Config);
-		Port : Natural := AWS.Config.Server_Port(Config);
 	begin
 		Aws.Server.Log.Start(WS, Auto_Flush => True);
 		Aws.Server.Log.Start_Error(WS);
 
-		log("[server]", "Setting Security", Debug);
+		log("[server]", "Setting Security", Info);
 
-		if AWS.Net.SSL.Is_Supported then
-			log("[server]", "SSL supported.", Debug);
-		else
-			log("[server]", "SSL not supported.", Debug);
+		if not AWS.Net.SSL.Is_Supported then
+			log("[server]", "SSL not supported.", emergency);
+			return;
 		end if;
+
 		AWS.Server.Set_Security (
 			WS,
-			Key_Filename         => "aws-server.key",
-			Certificate_Filename => "aws-server.cert");
+			Key_Filename         => Config.Private_Key_Name,
+			Certificate_Filename => Config.Certificate_Name);
 
-		log("[server]", "Starting server on port " & Natural'Image(AWS.Config.Server_Port(Config)), Debug);
+		log("[server]", "Starting server on port " & Natural'Image(Config.Server_Port), Info);
 		AWS.Server.Start (
 			Web_Server => WS,
 			Callback => CB'Access,
 			Session => True,
-			Name => Name,
-			Port => Port,
+			Name => Config.Server_Name,
+			Port => Config.Server_Port,
 			Security => True,
 			Upload_Directory => "private/image"
 		);
 
-		log("[server]", "Starting WebSocket.Registry", Debug);
+		log("[server]", "Starting WebSocket.Registry", Info);
 		AWS.Net.WebSocket.Registry.Control.Start;
-		log("[server]", "Registering /ws (websocket entry)", Debug);
+
+		log("[server]", "Registering /ws (websocket entry)", Info);
 		AWS.Net.WebSocket.Registry.Register ("/ws", WebSocket.Create'Access);
 
 		--  Wait for 'q' key pressed...
 
-		Text_IO.Put_Line ("AWS " & AWS.Version);
-		Text_IO.Put_Line ("Enter 'q' key to exit...");
+		log("[server]", "AWS " & AWS.Version, info);
+		log("[server]", "Enter 'q' key to exit... and Ctrl-C", info);
 		AWS.Server.Wait (AWS.Server.Q_Key_Pressed);
 
 		--  Close servers.
