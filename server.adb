@@ -87,8 +87,10 @@ begin
 	declare
 		WS : AWS.Server.HTTP;
 	begin
-		Aws.Server.Log.Start(WS, Auto_Flush => True);
-		Aws.Server.Log.Start_Error(WS);
+		if Config.Log_Request then
+			Aws.Server.Log.Start(WS, Auto_Flush => True);
+			Aws.Server.Log.Start_Error(WS);
+		end if;
 
 		log("[server]", "Setting Security", Info);
 

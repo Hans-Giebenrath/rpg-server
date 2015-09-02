@@ -12,6 +12,7 @@ package Config is
 	-- Port of the Server
 	function Server_Port return Natural;
 	function Server_Name return String;
+	function Log_Request return Boolean;
 
 	function Psql_Hostname return String;
 	function Psql_Port return String;

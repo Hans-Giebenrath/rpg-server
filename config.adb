@@ -24,6 +24,10 @@ package body Config is
 	function Server_Name return String is
 		(To_String(Server_Name_S));
 
+	Log_Request_B : Boolean;
+	function Log_Request return Boolean is
+		(Log_Request_B);
+
 	Psql_Hostname_S : Unbounded_String;
 	function Psql_Hostname return String is
 		(To_String(Psql_Hostname_S));
@@ -58,6 +62,7 @@ begin
 
 	Server_Port_N := Natural'Value(Config.Get("server.port"));
 	Server_Name_S := To_Unbounded_String(Config.Get("server.name"));
+	Log_Request_B := Boolean'Value(Config.Get("server.logrequest"));
 
 	Psql_Hostname_S := To_Unbounded_String(Config.Get("psql.hostname"));
 	Psql_Port_S :=  To_Unbounded_String(Config.Get("psql.port"));
