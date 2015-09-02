@@ -88,6 +88,7 @@ package body role is
 					when Error : others =>
 						Result := Error_Json("Login was not succesfull.");
 						log_exception(Error, "[/role/login]");
+						goto CLEANUP;
 				end;
 
 				declare
@@ -183,6 +184,7 @@ package body role is
 				end;
 		end case;
 
+		<<CLEANUP>>
 		for E of Param_Values.all loop
 			Free(E);
 		end loop;
