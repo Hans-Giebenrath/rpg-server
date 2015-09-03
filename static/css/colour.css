@@ -35,16 +35,16 @@
 .colour .gallery:last-child {
   border-bottom: none;
 }
-.colour #modal .header {
+.colour #overlay .header {
   border-bottom: 3px solid;
 }
-.colour #modal #all-my-roles * {
+.colour #overlay #all-my-roles * {
   padding: 1px;
 }
-.colour #modal #all-my-roles > span {
+.colour #overlay #all-my-roles > span {
   display: none;
 }
-.colour #modal #all-my-roles .lvl3 {
+.colour #overlay #all-my-roles .lvl3 {
   padding-left: 1em;
 }
 .colour nav *,

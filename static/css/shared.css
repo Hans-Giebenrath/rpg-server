@@ -98,13 +98,19 @@ dd {
 .summary {
   margin: 0 0 1em 1em;
 }
+rpg-priv,
 div.priv {
   border-left: 2px solid red;
   background-color: #ffe8e8;
 }
+p > rpg-priv,
 span.priv {
   font-style: italic;
   color: red;
+}
+p > rpg-priv,
+span.priv:before {
+  content: ' ';
 }
 .priv .summary {
   border: 1px solid red;
@@ -311,7 +317,7 @@ span.tag {
   float: left;
   margin-right: 15px;
 }
-#modal {
+#overlay {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -323,63 +329,63 @@ span.tag {
   justify-content: center;
   /* background-color: #fff; */
 }
-#modal.hidden {
+#overlay.hidden {
   display: none;
 }
-#modal .small {
+#overlay .small {
   max-width: 25em;
   min-width: 0;
 }
-#modal form {
+#overlay form {
   background-color: white;
   margin-top: auto;
   margin-bottom: auto;
 }
-#modal form ul {
+#overlay form ul {
   width: 100%;
   margin: 0;
   padding: 0;
 }
-#modal > * {
+#overlay > * {
   width: 65%;
   max-width: 60em;
   min-width: 25em;
   text-align: center;
 }
-#modal label {
+#overlay label {
   min-width: 30%;
   text-align: left;
 }
-#modal label + input {
+#overlay label + input {
   width: 100%;
 }
-#modal label + textarea {
+#overlay label + textarea {
   width: 100%;
   display: block;
   height: 24em;
 }
-#modal label + textarea.short {
+#overlay label + textarea.short {
   height: 10em;
 }
-#modal .entry {
+#overlay .entry {
   margin: 0.4em;
 }
-#modal .btn-container {
+#overlay .btn-container {
   padding: 4px;
 }
-#modal #all-my-roles {
+#overlay #all-my-roles {
   text-align: left;
 }
-#modal #all-my-roles * {
+#overlay #all-my-roles * {
   padding: 1px;
 }
-#modal #all-my-roles > span {
+#overlay #all-my-roles > span {
   display: none;
 }
-#modal #all-my-roles .lvl2 {
+#overlay #all-my-roles .lvl2 {
   font-size: 1.2em;
 }
-#modal #all-my-roles .lvl3 {
+#overlay #all-my-roles .lvl3 {
   padding-left: 1em;
 }
 /*
