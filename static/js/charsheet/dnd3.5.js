@@ -33,7 +33,12 @@ define(["dojo/dom",
 	var nodes = {
 		root : null,
 		sheet : null,
+		edit : null,
+		save : null,
+		close : null,
 	}
+	var states = { disabled : 0, enabled : 1 };
+	var state = states.disabled;
 	var module = {};
 
 	var character = {
@@ -54,10 +59,147 @@ define(["dojo/dom",
 		numspells : new observable(new memory({}))
 	};
 
+	var attrToBon = function(v) {
+		return parseInt(Math.floor((v - 10) / 2));
+	};
+
+	var ons = [];
+	var inputs = [];
+	var a = "rpg:dnd3.5-obj";
+	var input = (function() {
+
+		// as this will be created on destruction, we can safely pass a value.
+		return function(store, item, field) {
+			var ret = construct.toDom("<div class=\"dnd3.5-input-container\"><span class=\"" + (state === states.disabled ? "" : "hidden") + "\">" + item[field] + "</span><input class=\"" + (state === states.enabled ? "" : "hidden") + "\" type=\"text\" value=\"" + item[field] + "\" /></div>");
+			var ctrl = {
+				disable : function() {
+					dom_class.remove(ret.firstElementChild, "hidden");
+					dom_class.add(ret.lastElementChild, "hidden");
+				},
+				enable : function() {
+					dom_class.add(ret.firstElementChild, "hidden");
+					dom_class.remove(ret.lastElementChild, "hidden");
+				},
+				store : function(v) {
+					var n = store.get(item.id);
+					n[field] = v;
+					store.put(n);
+				},
+				destroy : function() {
+
+				}
+			};
+			ret.lastElementChild[a] = ctrl;
+			inputs.push(ctrl);
+			return ret;
+		};
+	})();
+
+	var createTable = function(headers) {
+		var ih = "";
+		if (headers) {
+			ih = headers.reduce(function(prev, curr) {
+				return prev + "<th>" + curr + "</th>";
+			}, "<thead><tr>") + "</tr></thead>";
+		}
+		ih = "<table>" + ih + "<tbody></tbody></table>";
+		var ret = {};
+		ret.table = construct.toDom(ih);
+		ret.body = ret.table.tBodies[0];
+		return ret;
+	};
+
+	// insertRow {{{
+	character.misc.createTable = function() { return createTable(); };
+	character.misc.insertRow = function(item) {
+		var ret = construct.toDom("<tr><td>" + item.id + "</td><td></td></tr>");
+		construct.place(input(character.misc, item, "value"), ret.children[1], "first");
+		return ret;
+	};
+
+	character.attributes.createTable = function() {
+		return createTable(["Attribute", "Score", "Modifier", "Temp Score", "Temp Modifier"]);
+	};
+	character.attributes.insertRow = function(item) {
+		var ret = construct.toDom(
+			"<tr><td>" + item.id + "</td><td></td><td>" + attrToBon(item.score) + "</td><td></td><td>" + attrToBon(item.tempscore) + "</td></tr>"
+		);
+		
+		construct.place(input(character.attributes, item, "score"), ret.children[1], "first");
+		construct.place(input(character.attributes, item, "tempscore"), ret.children[3], "first");
+
+		return ret;
+	};
+	character.attributes.onupdate = function(item) {
+		onAttrChange(item.id, (item.tempscore ? attrToBon(item.tempscore) : attrToBon(item.score)));
+	};
+	character.savings.createTable = function() {
+		return createTable(["Name", "Total", "", "Base", "", "Abil", "", "Magic", "", "Misc", "", "Temp Modifier"]);
+	};
+	character.savings.insertRow = function(item) {
+		var ih = "<tr><td>" + item.id + "</td>";
+		var attr = character.attributes.get(item.attr);
+		var abmod = attrToBon(!!attr.tempscore ? attr.tempscore : attr.score);
+		ih += "<td>" + (item.base + abmod + item.magmod + item.miscmod) + "</td>";
+		ih += "<td>=</td><td></td>"; // into input
+		ih += "<td>+</td><td>" + abmod + "</td>";
+		ih += "<td>+</td><td></td>"; // into input
+		ih += "<td>+</td><td></td>"; // into input
+		ih += "<td>+</td><td></td>"; // into input
+		var ret = construct.toDom(ih);
+		
+		construct.place(input(character.attributes, item, "base"), ret.children[3], "first");
+		construct.place(input(character.attributes, item, "magmod"), ret.children[7], "first");
+		construct.place(input(character.attributes, item, "miscmod"), ret.children[9], "first");
+		construct.place(input(character.attributes, item, "tempmod"), ret.children[11], "first");
+
+		return ret;
+	};
+	character.fight.insertRow = function(item) {
+
+	};
+	character.attack.insertRow = function(item) {
+
+	};
+	character.skills.insertRow = function(item) {
+
+	};
+	character.feats.insertRow = function(item) {
+
+	};
+	character.gear.insertRow = function(item) {
+
+	};
+	character.possessions.insertRow = function(item) {
+
+	};
+	character.abilities.insertRow = function(item) {
+
+	};
+	character.money.insertRow = function(item) {
+
+	};
+	character.languages.insertRow = function(item) {
+
+	};
+	character.domains.insertRow = function(item) {
+
+	};
+	character.knownspells.insertRow = function(item) {
+
+	};
+	character.numspells.insertRow = function(item) {
+
+	};
+	// }}}
+
 	var onAttrChange = function(attr, new_mod) {
 		character.skills.query({ attr : attr }).forEach(function(o) {
 			o.abmod = new_mod;
 			character.skills.put(o);
+		});
+		character.savings.query({ attr : attr }).forEach(function(o) {
+			character.savings.put(o);
 		});
 	};
 
@@ -70,38 +212,6 @@ define(["dojo/dom",
 		return (x | 0) === x;
 	}
 
-	var ons = [];
-	var inputs = [];
-	(function() {
-		var a = "rpg:dnd3.5-obj";
-
-			// as this will be created on destruction, we can safely pass a value.
-		return function(store, id, field, value) {
-			var ret = construct.toDom("<div class=\"dnd3.5-input-container\"><span>" + value + "</span><input type=\"text\" value=\"" + value + "\" /></div>");
-			var ctrl = {
-				disable : function() {
-					dom_class.remove(ret.firstElementChild, "hidden");
-					dom_class.add(ret.lastElementChild, "hidden");
-				},
-				enable : function() {
-					dom_class.add(ret.firstElementChild, "hidden");
-					dom_class.remove(ret.lastElementChild, "hidden");
-				},
-				store : function(v) {
-					var n = store.get(id);
-					n[field] = v;
-					store.put(n);
-				},
-				destroy : function() {
-
-				}
-			};
-			ret.lastElementChild[a] = ctrl;
-			inputs.push(ret);
-			return ret;
-		};
-	})();
-
 	var lists = [];
 	var clear = function() { // {{{
 		// misc
@@ -109,19 +219,13 @@ define(["dojo/dom",
 			"Character Name", "Player", "Class", "Race",
 			"Alignment", "Deity", "Size", "Age", "Gender", 
 			"Height", "Weight", "Eyes", "Hair", "Skin"
-		].forEach(function(o) { character.misc.add({id: o}); });
-		character.misc.display = function(container) {
-			lists.push(list(container, character.misc.query(), function insertRow(item) {
-				var ret = 
-			});
-
-		};
+		].forEach(function(o) { character.misc.add({id: o, value: ""}); });
 
 		// attributes
 		[
 			"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"
 		].forEach(function(o) {
-			character.attributes.put({ id : o, score : 0, tempscore : null });
+			character.attributes.put({ id : o, score : 0, tempscore : 0 });
 		});
 			
 
@@ -131,7 +235,7 @@ define(["dojo/dom",
 			{ name : "Reflex", attr : "Dexterity" },
 			{ name : "Will", attr : "Wisdom" }
 		].forEach(function(o) {
-			character.savings.put({ id : o.name, attr : o.attr, base : 0, magmod : 0, miscmod : 0 });
+			character.savings.put({ id : o.name, attr : o.attr, base : 0, magmod : 0, miscmod : 0, tempmod : 0});
 		});
 
 		// fight
@@ -199,24 +303,31 @@ define(["dojo/dom",
 		nodes.root = id;
 		nodes.edit = construct.toDom("<input type=\"button\" value=\"Edit\" />");
 		nodes.save = construct.toDom("<input type=\"button\" class=\"hidden\" value=\"Save\" />");
+		nodes.close = construct.toDom("<input type=\"button\" value=\"Close\" />");
 
 		nodes.edit.onclick = function(e) {
 			dom_class.add(nodes.edit, "hidden");
 			dom_class.remove(nodes.save, "hidden");
+			state = states.enabled;
 			inputs.forEach(function(o) { o.enable(); });
 		};
 		nodes.save.onclick = function(e) {
 			dom_class.remove(nodes.edit, "hidden");
-			dom_class.edit(nodes.save, "hidden");
+			dom_class.add(nodes.save, "hidden");
+			state = states.disabled;
 			inputs.forEach(function(o) { o.disable(); });
+		};
+		nodes.close.onclick = function(e) {
+			module.onclose();
 		};
 		nodes.sheet = construct.toDom("<div></div>");
 		construct.place(nodes.edit, nodes.root, "last");
 		construct.place(nodes.save, nodes.root, "last");
+		construct.place(nodes.close, nodes.root, "last");
 		construct.place(nodes.sheet, nodes.root, "last");
 
 		clear();
-		on(nodes.sheet, "input:onchange", function(e) {
+		on(nodes.sheet, "input:change", function(e) {
 			// TODO add debounce!
 			console.log("[dnd3.5] input:onchange fired!");
 			var v = parseInt(this.value);
@@ -225,10 +336,16 @@ define(["dojo/dom",
 			};
 		});
 		Object.keys(character).forEach(function(key) {
-
+			var s = character[key];
+			if (!s.createTable) return;
+			var table = s.createTable();
+			construct.place(table.table, nodes.sheet, "first");
+			lists.push(list(table.body, s.query(), s.insertRow, s.ondelete, s.onupdate, s.oninsert));
 		});
 		
 	};
+
+	module["onclose"] = function() {};
 
 	module["display"] = function(data) {
 		data = data || {};

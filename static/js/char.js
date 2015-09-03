@@ -34,16 +34,20 @@ require(["dojo/dom",
 		 "rpg/log",
 		 "rpg/ajax",
 		 "rpg/store",
+		 "rpg/overlay",
+		 "rpg/charsheet/dnd3.5",
 		 "dojo/NodeList-dom",
 		 "dojo/domReady!"
-], function(dom, dom_class, style, attr, construct, router, on, memory, request, topic, soul, modal, filt, tabpane, markdown, log, ajax, store) {
+], function(dom, dom_class, style, attr, construct, router, on, memory, request, topic, soul, modal, filt, tabpane, markdown, log, ajax, store, overlay, sheet) {
 	var last_loaded_id = null;
 	var nodes = {
 		image : dom.byId("char-profile"),
 		name : dom.byId("char-name"),
 		short : dom.byId("char-summary").children[1],
 		content : dom.byId("char-content"),
-		edit : dom.byId("char-edit")
+		edit : dom.byId("char-edit"),
+		sheet_btn : dom.byId("char-sheet-btn"),
+		sheet : construct.toDom("<div></div>"),
 	};
 	var update_content = function(data) {
 		nodes.image.src = data.image || "";
@@ -90,6 +94,12 @@ require(["dojo/dom",
 
 	on(nodes.content, ".toc div:click", function (e) {
 		router.go("/char/" + last_loaded_id + "/" + attr.get(this, "data-a"));
+	});
+
+	overlay.init(nodes.sheet);
+	on(nodes.sheet_btn, "click", function(e) {
+		sheet.show(nodes.sheet);
+		overlay.show(nodes.sheet);
 	});
 	var display = (function() { // {{{
 		var obs;
@@ -149,4 +159,5 @@ require(["dojo/dom",
 	router.register("/char/:id/:anchor", function(arg) {
 		display(arg.params.id, arg.params.anchor);
 	});
+
 });
