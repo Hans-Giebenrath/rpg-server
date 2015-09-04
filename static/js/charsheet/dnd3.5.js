@@ -28,8 +28,9 @@ define(["dojo/dom",
 		"rpg/list",
 	    "rpg/ajax",
 		"rpg/overlay",
+		"rpg/rndm",
 		"rpg/soul"
-], function (dom, lang, construct, dom_class, attr, observable, memory, debounce, on, list, ajax, overlay, soul) {
+], function (dom, lang, construct, dom_class, attr, observable, memory, debounce, on, list, ajax, overlay, rndm, soul) {
 	var nodes = {
 		root : null,
 		sheet : null,
@@ -62,6 +63,17 @@ define(["dojo/dom",
 	var attrToBon = function(v) {
 		return parseInt(Math.floor((v - 10) / 2));
 	};
+	var getAttrBonus = function(v) {
+		var o = v;
+		if (typeof v === "string") {
+			o = character.attributes.get(v);
+		}
+		if (o.tempscore === "") {
+			return attrToBon(o.score);
+		} else {
+			return attrToBon(o.tempscore);
+		}
+	};
 
 	var ons = [];
 	var inputs = [];
@@ -69,8 +81,8 @@ define(["dojo/dom",
 	var input = (function() {
 
 		// as this will be created on destruction, we can safely pass a value.
-		return function(store, item, field) {
-			var ret = construct.toDom("<div class=\"dnd3.5-input-container\"><span class=\"" + (state === states.disabled ? "" : "hidden") + "\">" + item[field] + "</span><input class=\"" + (state === states.enabled ? "" : "hidden") + "\" type=\"text\" value=\"" + item[field] + "\" /></div>");
+		return function(store, item, field, caption) {
+			var ret = construct.toDom("<span class=\"dnd3.5-input-container\"><span class=\"" + (state === states.disabled ? "" : "hidden") + "\">" + item[field] + "</span><input class=\"" + (state === states.enabled ? "" : "hidden") + "\" type=\"text\" value=\"" + item[field] + "\" /></span>");
 			var ctrl = {
 				disable : function() {
 					dom_class.remove(ret.firstElementChild, "hidden");
@@ -89,13 +101,18 @@ define(["dojo/dom",
 
 				}
 			};
+			if (caption && typeof caption === "string") {
+				attr.set(ret.firstElementChild, "data-caption", caption);
+			}
 			ret.lastElementChild[a] = ctrl;
 			inputs.push(ctrl);
 			return ret;
 		};
 	})();
 
-	var createTable = function(headers) {
+	// if onexpand is function, then it will be the click
+	// handler of that function
+	var createTable = function(headers, onexpand) {
 		var ih = "";
 		if (headers) {
 			ih = headers.reduce(function(prev, curr) {
@@ -108,15 +125,38 @@ define(["dojo/dom",
 		ret.body = ret.table.tBodies[0];
 		return ret;
 	};
+	var createSection = function() {
+		var tmp = construct.toDom("<div></div>");
+		return { table : tmp, body : tmp };
+	};
 
 	// insertRow {{{
-	character.misc.createTable = function() { return createTable(); };
+	character.insertData = function (data) {
+		var self = this;
+		if (Array.isArray(data)) {
+			data.forEach(function(o) {
+				self.insertData(o);
+			});
+			return;
+		}
+
+		if (typeof data === "string") {
+			data = { id : data };
+		}
+		self.put(lang.mixin(lang.clone(self.std), data));
+	}
+	Object.keys(character).forEach(function(k) {
+		character[k].insertData = character.insertData;
+	});
+	character.misc.std = { id : "", value : "" };
+	character.misc.createTable = function() { return createSection(); };
 	character.misc.insertRow = function(item) {
 		var ret = construct.toDom("<tr><td>" + item.id + "</td><td></td></tr>");
 		construct.place(input(character.misc, item, "value"), ret.children[1], "first");
 		return ret;
 	};
 
+	character.attributes.std = { id : "", score : 0, tempscore : 0 };
 	character.attributes.createTable = function() {
 		return createTable(["Attribute", "Score", "Modifier", "Temp Score", "Temp Modifier"]);
 	};
@@ -131,15 +171,16 @@ define(["dojo/dom",
 		return ret;
 	};
 	character.attributes.onupdate = function(item) {
-		onAttrChange(item.id, (item.tempscore ? attrToBon(item.tempscore) : attrToBon(item.score)));
+		onAttrChange(item.id, getAttrBonus(item));
 	};
+
+	character.savings.std = { id : "", attr : "", base : 0, magmod : 0, miscmod : 0, tempmod : 0 };
 	character.savings.createTable = function() {
 		return createTable(["Name", "Total", "", "Base", "", "Abil", "", "Magic", "", "Misc", "", "Temp Modifier"]);
 	};
 	character.savings.insertRow = function(item) {
 		var ih = "<tr><td>" + item.id + "</td>";
-		var attr = character.attributes.get(item.attr);
-		var abmod = attrToBon(!!attr.tempscore ? attr.tempscore : attr.score);
+		var abmod = getAttrBonus(item.attr);
 		ih += "<td>" + (item.base + abmod + item.magmod + item.miscmod) + "</td>";
 		ih += "<td>=</td><td></td>"; // into input
 		ih += "<td>+</td><td>" + abmod + "</td>";
@@ -155,9 +196,63 @@ define(["dojo/dom",
 
 		return ret;
 	};
+	character.fight.std = { id : "",  };
+	character.fight.createTable = function() { return createSection(); };
 	character.fight.insertRow = function(item) {
-
+		var ret;
+		switch(item.id) {
+			case "Hit Points":
+			case "Speed":
+			case "Damage Reduction":
+			case "Touch":
+			case "Flat-Footed":
+			case "Base Attack Bonus":
+			case "Spell Resistance":
+			case "Spell Save":
+			case "Arcane Spell Failure":
+				var ih = "<div><span>" + item.id + "</span><span></span></div>";
+				ret = construct.toDom(ih);
+				construct.place(input(character.fight, item, "value"), ret.children[1], "first");
+				break;
+			case "Armor Class":
+				var total = 10 + parseInt(item.armor) + parseInt(item.shield) + parseInt(item.size) + parseInt(item.natural) + parseInt(item.defl) + parseInt(item.misc) + getAttrBonus("Dexterity");
+				var ih = "<div><span>Hit Points</span><span>" + total + "</span><span>=10</span>";
+				ih += "<span>+</span><span></span>";
+				ih += "<span>+</span><span></span>";
+				ih += "<span data-caption=\"Dex Modifier\">+" + getAttrBonus("Dexterity") + "</span>";
+				ih += "<span>+</span><span></span>";
+				ih += "<span>+</span><span></span>";
+				ih += "<span>+</span><span></span>";
+				ih += "<span>+</span><span></span>";
+				ret = construct.toDom(ih);
+				construct.place(input(character.fight, item, "armor", "Armor Bonus"), ret.children[4], "first");
+				construct.place(input(character.fight, item, "shield", "Shield Bonus"), ret.children[6], "first");
+				construct.place(input(character.fight, item, "size", "Size Modifier"), ret.children[9], "first");
+				construct.place(input(character.fight, item, "natural", "Natural Armor"), ret.children[11], "first");
+				construct.place(input(character.fight, item, "defl", "Deflection Modifier"), ret.children[13], "first");
+				construct.place(input(character.fight, item, "misc", "Misc Modifier"), ret.children[15], "first");
+				break;
+			case "Initiative":
+				var total = getAttrBonus("Dexterity") + parseInt(item.misc);
+				var ih = "<div><span>Initiative</span><span>" + total + "</span><span>=</span>";
+				ih += "<span data-caption=\"Dex Modifier\">" + getAttrBonus("Dexterity") + "</span>";
+				ih += "<span>+</span><span></span>";
+				ret = construct.toDom(ih);
+				construct.place(input(character.fight, item, "misc", "Misc Modifier"), ret.children[5], "first");
+				break;
+			case "Grapple":
+				break;
+			default: console.error("[character.fight.insertRow] Not supported id.", item);
+		};
+		return ret;
 	};
+	character.fight.onupdate = function(item) {
+		if (item.id == "Base Attack Bonus") {
+			var o = character.fight.get("Grapple");
+			character.fight.put(o);
+		}
+	};
+
 	character.attack.insertRow = function(item) {
 
 	};
@@ -201,6 +296,13 @@ define(["dojo/dom",
 		character.savings.query({ attr : attr }).forEach(function(o) {
 			character.savings.put(o);
 		});
+		if (attr == "Dexterity") {
+			character.misc.put(character.misc.get("Armor Class"));
+			character.misc.put(character.misc.get("Initiative"));
+		}
+		if (attr == "Strength") {
+			character.fight.put(character.fight.get("Grapple"));
+		}
 	};
 
 	// credits: http://stackoverflow.com/a/14794066
@@ -215,55 +317,82 @@ define(["dojo/dom",
 	var lists = [];
 	var clear = function() { // {{{
 		// misc
-		[
+		character.misc.insertData([
 			"Character Name", "Player", "Class", "Race",
 			"Alignment", "Deity", "Size", "Age", "Gender", 
-			"Height", "Weight", "Eyes", "Hair", "Skin"
-		].forEach(function(o) { character.misc.add({id: o, value: ""}); });
+			"Height", "Weight", "Eyes", "Hair", "Skin",
+			"Campaign", "Experience Points"
+		]);
 
 		// attributes
-		[
+		character.attributes.insertData([
 			"Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"
-		].forEach(function(o) {
-			character.attributes.put({ id : o, score : 0, tempscore : 0 });
-		});
+		]);
 			
-
 		// savings
-		[
-			{ name : "Fortitude", attr : "Constitution" },
-			{ name : "Reflex", attr : "Dexterity" },
-			{ name : "Will", attr : "Wisdom" }
-		].forEach(function(o) {
-			character.savings.put({ id : o.name, attr : o.attr, base : 0, magmod : 0, miscmod : 0, tempmod : 0});
-		});
+		character.savings.insertData([
+			{ id : "Fortitude", attr : "Constitution" },
+			{ id : "Reflex", attr : "Dexterity" },
+			{ id : "Will", attr : "Wisdom" }
+		]);
 
 		// fight
-		[
+		character.fight.insertData([
 			{ id : "Hit Points", value : 0},
 			{ id : "Armor Class", armor : 0, shield : 0, size : 0, natural : 0, defl : 0, misc : 0},
 			{ id : "Speed", value : 0},
 			{ id : "Damage Reduction", value : 0},
-			{ id : "Touch" },
-			{ id : "Flat-Footed" },
+			{ id : "Touch", value : 0 },
+			{ id : "Flat-Footed", value : 0 },
 			{ id : "Initiative", misc : 0},
 			{ id : "Base Attack Bonus", value: 0},
 			{ id : "Spell Resistance", value : 0},
-			{ id : "Grapple", size: 0, misc: 0}
-		].forEach(function(o) {
-			character.fight.put(o);
-		});
+			{ id : "Grapple", size: 0, misc: 0},
+			{ id : "Spell Save", value : 0},
+			{ id : "Arcane Spell Failure", value : 0},
+		]);
 
 		// attack
 		// empty on default
 
 		// skills
-		[
-			{ id : "Appraise", attr : "Intelligence", rank : 0, misc : 0, classab : false, untrained : true},
-			{ id : "Handle Animal", attr : "Charisma", rank : 0, misc : 0, classab : false, untrained : false}
-		].forEach(function(o) {
-			character.skills.put(o);
-		});
+		character.skills.insertData([
+			{ id : "Appraise", attr : "Intelligence", untrained : true},
+			{ id : "Balance", attr : "Dexterity", untrained : true},
+			{ id : "Bluff", attr : "Charisma", untrained : true},
+			{ id : "Climb", attr : "Strength", untrained : true},
+			{ id : "Concentration", attr : "Constitution", untrained : true},
+			{ id : "Craft (...)", attr : "Intelligence", untrained : true},
+			{ id : "Decipher Script", attr : "Intelligence", untrained : false},
+			{ id : "Diplomacy", attr : "Charisma", untrained : true},
+			{ id : "Disable Device", attr : "Intelligence", untrained : false},
+			{ id : "Disguise", attr : "Charisma", untrained : true},
+			{ id : "Escape Artist", attr : "Dexterity", untrained : true},
+			{ id : "Gorgery", attr : "Intelligence", untrained : true},
+			{ id : "Gather Information", attr : "Charisma", untrained : true},
+			{ id : "Handle Animal", attr : "Charisma", untrained : false},
+			{ id : "Heal", attr : "Wisdom", untrained : true},
+			{ id : "Hide", attr : "Dexterity", untrained : true},
+			{ id : "Intimidate", attr : "Charisma", untrained : true},
+			{ id : "Jump", attr : "Strength", untrained : true},
+			{ id : "Knowledge (...)", attr : "Intelligence", untrained : false},
+			{ id : "Listen", attr : "Wisdom", untrained : true},
+			{ id : "Move Silently", attr : "Dexterity", untrained : true},
+			{ id : "Open Lock", attr : "Dexterity", untrained : false},
+			{ id : "Perform (...)", attr : "Charisma", untrained : false},
+			{ id : "Profession (...)", attr : "Wisdom", untrained : false},
+			{ id : "Ride", attr : "Dexterity", untrained : true},
+			{ id : "Search", attr : "Intelligence", untrained : true},
+			{ id : "Sense Motive", attr : "Wisdom", untrained : true},
+			{ id : "Sleight of Hand", attr : "Dexterity", untrained : false},
+			{ id : "Spellcraft", attr : "Intelligence", untrained : false},
+			{ id : "Spot", attr : "Wisdom", untrained : true},
+			{ id : "Survival", attr : "Wisdom", untrained : true},
+			{ id : "Swim", attr : "Strength", untrained : true},
+			{ id : "Tumble", attr : "Dexterity", untrained : false},
+			{ id : "Use Magic Device", attr : "Charisma", untrained : false},
+			{ id : "Use Rope", attr : "Dexterity", untrained : true},
+		]);
 
 		// feats
 
@@ -274,6 +403,7 @@ define(["dojo/dom",
 		// abilities
 
 		// money
+		character.money.insertData([ "CP", "SP", "GP", "PP" ]);
 
 		// languages
 
@@ -282,6 +412,7 @@ define(["dojo/dom",
 		// knownspells
 
 		// numspells
+		character.numspells.insertData(["0", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"]);
 	}; // }}}
 
 	var clear_store = function (store) {
