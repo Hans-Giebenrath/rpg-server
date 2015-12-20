@@ -303,11 +303,15 @@ require(["dojo/dom",
 					dom_class.remove(nodes.view, "hidden");
 					dom_class.add(nodes.overview, "hidden");
 
+					// Do the change already here.
+					// If it is done after the if, then there is no content
+					// to scroll to. Thus, first show, then go to content.
+					tabpane.change("wiki");
+
 					if (anchor) {
 						var node = dom.byId(anchor);//query("[rpg-anchor=\"" + anchor + "\"]")[0];
 						if (node) { node.scrollIntoView(); }
 					}
-					tabpane.change("wiki");
 				}, null, wiki_create_modal);
 			}
 		};
