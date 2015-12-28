@@ -49,6 +49,7 @@ define(["dojo/dom",
 	};
 
 	var currently_shown = 0;
+	var formerScrollPos = 0;
 	var all_modals = [];
 	var overlay = dom.byId("modal");
 	var content = dom.byId("content");
@@ -58,6 +59,7 @@ define(["dojo/dom",
 		if (currently_shown === 0) {
 			dom_class.add(overlay, "hidden");
 			dom_class.remove(content, "hidden");
+			window.scrollTo(window.scrollX, formerScrollPos);
 		} else {
 			dom_class.remove(overlay.firstElementChild, "hidden");
 		}
@@ -84,8 +86,10 @@ define(["dojo/dom",
 		if (overlay.firstElementChild != null) {
 			dom_class.add(overlay.firstElementChild, "hidden");
 		} else {
+			formerScrollPos = window.scrollY;
 			dom_class.remove(overlay, "hidden");
 			dom_class.add(content, "hidden");
+			window.scrollTo(window.scrollX, 0);
 		}
 		construct.place(el, overlay, "first");
 	};
@@ -157,12 +161,13 @@ define(["dojo/dom",
 		//
 		var btncont = construct.create("div", { "class" : "btn-container" }, obj.node, "last");
 		btns.forEach(function(item) {
+			var _label = Object.keys(item)[0];
 			var _btn = construct.create("input", {
 				type : "button",
-				value : Object.keys(item)[0]
+				value : _label
 			}, btncont, "last");
 			on(_btn, "click", function() {
-				item[Object.keys(item)[0]](flat, function() {
+				item[_label](flat, function() {
 					obj.close();
 					// possibly destroyes in "close"
 					if (flat) Object.keys(flat).forEach(function (key) { if (flat[key].value) { flat[key].value = ""; } });

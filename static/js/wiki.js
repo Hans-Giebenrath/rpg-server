@@ -140,6 +140,7 @@ require(["dojo/dom",
 	var wiki_create_modal = (function () { // {{{
 		var _oncreated;
 		var _slug;
+		var _go_back;
 		var m = modal("Create a new Wikisite", null, 
 					  [
 						  { title : construct.toDom("<input type=\"text\" placeholder=\"Title for Wikisite\" />") },
@@ -167,21 +168,33 @@ require(["dojo/dom",
 							  );
 						  }
 					  },{
-						  "Cancel" : function (inputs, close) { close(); }
+						  "Cancel" : function (inputs, close) {
+							  close();
+							  if(_go_back === true) {
+								  window.history.go(-1);
+							  }
+						  }
 					  }
 					  ], function onstart(inputs) {
 						  inputs.rpg_character_rights = user_rights(inputs.permission);
 						  inputs.rpg_tags = tagselect(inputs.tags, null, true);
-						  inputs.slug.value = _slug;
+						  if (typeof _slug === 'string' && _slug !== '') {
+							  inputs.slug.disabled = true;
+							  inputs.slug.value = _slug;
+						  } else {
+							  inputs.slug.disabled = false;
+							  inputs.slug.value = '';
+						  }
 					  }, function onclose(inputs) {
 						  inputs.rpg_character_rights.destroy();
 						  inputs.rpg_tags.destroy();
 					  }
 					 )
-		return function (slug, oncreated) {
+		return function (slug, oncreated, go_back) {
 			// oncreated should be called with the newly created stuff from the server -> use topic listening for that.
 			_slug = slug || "";
 			_oncreated = oncreated;
+			_go_back = go_back;
 			m.show();
 		};
 	})(); // }}}
@@ -206,7 +219,7 @@ require(["dojo/dom",
 	})(); // }}}
 	nodes.add.on("click", function (e) {
 		// the data-arg contains the data of the newly created wiki. It is already stored (?)
-		wiki_create_modal("", function (data, slug) { router.go("/wiki/" + slug); });
+		wiki_create_modal("", function (data, slug) { router.go("/wiki/" + slug); }, false);
 	});
 	on(nodes.edit, "click", function(e) {
 		wiki_edit_modal();
@@ -311,8 +324,10 @@ require(["dojo/dom",
 					if (anchor) {
 						var node = dom.byId(anchor);//query("[rpg-anchor=\"" + anchor + "\"]")[0];
 						if (node) { node.scrollIntoView(); }
+					} else {
+						nodes.title.scrollIntoView();
 					}
-				}, null, wiki_create_modal);
+				}, null, function(slug, on_created) { wiki_create_modal(slug, on_created, true); });
 			}
 		};
 	})();
