@@ -54,9 +54,12 @@ require(["dojo/dom",
 		var signal = on(window, "scroll", fun);
 	}
 
-	on(dom.byId("play-nav"), "*:click", function(e) {
+	on(dom.byId("play-nav"), ".selectable:click", function(e) {
+		e.preventDefault();
+		e.stopPropagation();
 		var target = attr.get(this, "data-rpg-target");
 		tabpane.prepare(target, this);
 		router.go("/" + target);
+		return false;
 	})
 });
