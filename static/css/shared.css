@@ -98,13 +98,19 @@ dd {
 .summary {
   margin: 0 0 1em 1em;
 }
+rpg-priv,
 div.priv {
   border-left: 2px solid red;
-  background-color: #ffe8e8;
+  background-color: #FFE8E8;
 }
+p > rpg-priv,
 span.priv {
   font-style: italic;
   color: red;
+}
+p > rpg-priv,
+span.priv:before {
+  content: ' ';
 }
 .priv .summary {
   border: 1px solid red;
@@ -404,9 +410,11 @@ nav > * {
   position: relative;
 }
 #role-nav > div > span,
-#play-nav span {
+#play-nav a {
   display: block;
   text-align: center;
+  text-decoration: inherit;
+  color: inherit;
 }
 #role-nav > div > div {
   display: none;

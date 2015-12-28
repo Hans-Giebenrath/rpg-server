@@ -98,16 +98,19 @@ dd {
 .summary {
   margin: 0 0 1em 1em;
 }
+rpg-priv,
 div.priv {
   border-left: 2px solid red;
-  background-color: #ffe8e8;
+  background-color: #FFE8E8;
 }
+p > rpg-priv,
 span.priv {
   font-style: italic;
   color: red;
 }
+p > rpg-priv,
 span.priv:before {
-	content: ' ';
+  content: ' ';
 }
 .priv .summary {
   border: 1px solid red;
@@ -407,9 +410,11 @@ nav > * {
   position: relative;
 }
 #role-nav > div > span,
-#play-nav span {
+#play-nav a {
   display: block;
   text-align: center;
+  text-decoration: inherit;
+  color: inherit;
 }
 #role-nav > div > div {
   display: none;
@@ -549,16 +554,16 @@ th.rotate {
 .colour .gallery:last-child {
   border-bottom: none;
 }
-.colour #modal .header {
+.colour #overlay .header {
   border-bottom: 3px solid;
 }
-.colour #modal #all-my-roles * {
+.colour #overlay #all-my-roles * {
   padding: 1px;
 }
-.colour #modal #all-my-roles > span {
+.colour #overlay #all-my-roles > span {
   display: none;
 }
-.colour #modal #all-my-roles .lvl3 {
+.colour #overlay #all-my-roles .lvl3 {
   padding-left: 1em;
 }
 .colour nav *,
@@ -567,7 +572,7 @@ th.rotate {
 }
 .colour #role-nav {
   color: white;
-  background-color: #6c2412;
+  background-color: #6C2412;
 }
 .colour #role-nav input.delete {
   min-width: inherit;
@@ -578,7 +583,7 @@ th.rotate {
   padding-left: 0.2em;
   padding-right: 0.2em;
   text-align: center;
-  background-color: #6c2412;
+  background-color: #6C2412;
 }
 .colour #role-nav > div > div {
   color: black;
@@ -593,32 +598,32 @@ th.rotate {
 .colour #play-nav > * {
   padding: 0.4em 0 0.6em 0;
   display: inline-block;
-  color: #bea008;
-  background-color: #6c2412;
+  color: #BEA008;
+  background-color: #6C2412;
   border: 1px solid black;
   border-bottom: none;
   width: 20%;
   text-align: center;
 }
 .colour #play-nav {
-  box-shadow: inset 0px -25px 20px -20px #6c2412;
+  box-shadow: inset 0px -25px 20px -20px #6C2412;
 }
 .colour #play-nav > .selected {
   z-index: 3;
   border-bottom: none;
-  background-color: #ffffe9;
+  background-color: #FFFFE9;
   font-weight: normal;
 }
 .colour #breaker {
   border: 1px solid black;
-  background-color: #6c2412;
+  background-color: #6C2412;
   height: 1.5em;
 }
 .colour #wiki-overview-tags span {
   margin: 3px 6px;
 }
 .colour .tag.selected {
-  background-color: #ffffe9;
+  background-color: #FFFFE9;
 }
 .colour .tag > * {
   background-color: gainsboro;
@@ -644,8 +649,8 @@ th.rotate {
 }
 .colour th,
 .colour .header {
-  color: #ddc342;
-  background-color: #6c2412;
+  color: #DDC342;
+  background-color: #6C2412;
   font-weight: bold;
 }
 .colour #pane > * {
@@ -655,7 +660,7 @@ th.rotate {
   background-color: white;
 }
 .colour .summary {
-  border: 1px solid #bea008;
+  border: 1px solid #BEA008;
   margin: 0 0 1em 1em;
   background-color: white;
 }
@@ -677,7 +682,7 @@ th.rotate {
 }
 .colour form {
   border: 1px solid black;
-  box-shadow: 0 0 20px 5px #6c2412;
+  box-shadow: 0 0 20px 5px #6C2412;
 }
 .colour form > * {
   padding: 0;
@@ -802,11 +807,11 @@ th.rotate {
   height: 1.5em;
   padding: 0 1em;
   line-height: 1.3em;
-  color: #ddc342;
+  color: #DDC342;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-  background-color: #6c2412;
+  background-color: #6C2412;
   border: 1px solid black;
   cursor: pointer;
   box-sizing: border-box;
@@ -824,8 +829,8 @@ th.rotate {
 .colour input[type="submit"]:focus,
 .colour input[type="reset"]:focus,
 .colour input[type="button"]:focus {
-  color: #6c2412;
-  background-color: #ffffe9;
+  color: #6C2412;
+  background-color: #FFFFE9;
   outline: 0;
 }
 .colour nav input[type="button"],
@@ -838,12 +843,12 @@ th.rotate {
   border: none;
 }
 .colour .toc *:hover {
-  color: #a5774d;
+  color: #A5774D;
 }
 body.colour {
   background-color: Ivory;
   margin-top: 0;
-  box-shadow: 0 0 20px 5px #6c2412;
+  box-shadow: 0 0 20px 5px #6C2412;
 }
 
 .clean {
@@ -857,22 +862,22 @@ body.colour {
   padding: 0.2em 1em;
 }
 .clean #char-gallery {
-  border-top: 1px solid #e1e1e1;
+  border-top: 1px solid #E1E1E1;
 }
 .clean .gallery {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #E1E1E1;
 }
 .clean .gallery:last-child {
   border-bottom: none;
 }
 .clean #history-timelist > .orderable-row {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #E1E1E1;
 }
 .clean #history-timelist > .orderable-row:last-child {
   border-bottom: none;
 }
 .clean .history-detail-entry {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #E1E1E1;
   margin-top: 1em;
 }
 .clean .history-detail-entry:last-child {
@@ -884,15 +889,15 @@ body.colour {
 }
 .clean nav *,
 .clean nav .tooltip:after {
-  background-color: #f5f5f5;
+  background-color: #F5F5F5;
 }
 .clean nav,
 .clean nav > *,
 .clean nav > * :first-child {
-  background-color: #f5f5f5;
+  background-color: #F5F5F5;
 }
 .clean #role-nav > div > span,
-.clean #play-nav span {
+.clean #play-nav a {
   padding: 0.5em;
   padding-bottom: 0.7em;
 }
@@ -905,12 +910,12 @@ body.colour {
 }
 .clean span.tag.selected {
   color: white;
-  background-color: #33c3f0;
-  border-color: #33c3f0;
+  background-color: #33C3F0;
+  border-color: #33C3F0;
 }
 .clean span.tag.selected:hover {
-  background-color: #1eaedb;
-  border-color: #1eaedb;
+  background-color: #1EAEDB;
+  border-color: #1EAEDB;
 }
 .clean #pane > * {
   padding: 2em;
@@ -939,8 +944,8 @@ body.colour {
   padding: 0;
 }
 .clean form {
-  border-top: 1px solid #e1e1e1;
-  border-bottom: 1px solid #e1e1e1;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
 }
 .clean td,
 .clean th {
@@ -950,7 +955,7 @@ body.colour {
 .clean tr,
 .clean td,
 .clean th {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #E1E1E1;
   text-align: left;
   color: black;
   background-color: white;
@@ -1101,6 +1106,6 @@ body.colour {
   display: none;
 }
 .clean .toc *:hover {
-  color: #a5774d;
+  color: #A5774D;
 }
 

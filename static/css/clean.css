@@ -9,22 +9,22 @@
   padding: 0.2em 1em;
 }
 .clean #char-gallery {
-  border-top: 1px solid #e1e1e1;
+  border-top: 1px solid #E1E1E1;
 }
 .clean .gallery {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #E1E1E1;
 }
 .clean .gallery:last-child {
   border-bottom: none;
 }
 .clean #history-timelist > .orderable-row {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #E1E1E1;
 }
 .clean #history-timelist > .orderable-row:last-child {
   border-bottom: none;
 }
 .clean .history-detail-entry {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #E1E1E1;
   margin-top: 1em;
 }
 .clean .history-detail-entry:last-child {
@@ -36,15 +36,15 @@
 }
 .clean nav *,
 .clean nav .tooltip:after {
-  background-color: #f5f5f5;
+  background-color: #F5F5F5;
 }
 .clean nav,
 .clean nav > *,
 .clean nav > * :first-child {
-  background-color: #f5f5f5;
+  background-color: #F5F5F5;
 }
 .clean #role-nav > div > span,
-.clean #play-nav span {
+.clean #play-nav a {
   padding: 0.5em;
   padding-bottom: 0.7em;
 }
@@ -57,12 +57,12 @@
 }
 .clean span.tag.selected {
   color: white;
-  background-color: #33c3f0;
-  border-color: #33c3f0;
+  background-color: #33C3F0;
+  border-color: #33C3F0;
 }
 .clean span.tag.selected:hover {
-  background-color: #1eaedb;
-  border-color: #1eaedb;
+  background-color: #1EAEDB;
+  border-color: #1EAEDB;
 }
 .clean #pane > * {
   padding: 2em;
@@ -91,8 +91,8 @@
   padding: 0;
 }
 .clean form {
-  border-top: 1px solid #e1e1e1;
-  border-bottom: 1px solid #e1e1e1;
+  border-top: 1px solid #E1E1E1;
+  border-bottom: 1px solid #E1E1E1;
 }
 .clean td,
 .clean th {
@@ -102,7 +102,7 @@
 .clean tr,
 .clean td,
 .clean th {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #E1E1E1;
   text-align: left;
   color: black;
   background-color: white;
@@ -253,5 +253,5 @@
   display: none;
 }
 .clean .toc *:hover {
-  color: #a5774d;
+  color: #A5774D;
 }

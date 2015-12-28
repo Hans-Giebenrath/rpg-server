@@ -35,16 +35,16 @@
 .colour .gallery:last-child {
   border-bottom: none;
 }
-.colour #modal .header {
+.colour #overlay .header {
   border-bottom: 3px solid;
 }
-.colour #modal #all-my-roles * {
+.colour #overlay #all-my-roles * {
   padding: 1px;
 }
-.colour #modal #all-my-roles > span {
+.colour #overlay #all-my-roles > span {
   display: none;
 }
-.colour #modal #all-my-roles .lvl3 {
+.colour #overlay #all-my-roles .lvl3 {
   padding-left: 1em;
 }
 .colour nav *,
@@ -53,7 +53,7 @@
 }
 .colour #role-nav {
   color: white;
-  background-color: #6c2412;
+  background-color: #6C2412;
 }
 .colour #role-nav input.delete {
   min-width: inherit;
@@ -64,7 +64,7 @@
   padding-left: 0.2em;
   padding-right: 0.2em;
   text-align: center;
-  background-color: #6c2412;
+  background-color: #6C2412;
 }
 .colour #role-nav > div > div {
   color: black;
@@ -79,32 +79,32 @@
 .colour #play-nav > * {
   padding: 0.4em 0 0.6em 0;
   display: inline-block;
-  color: #bea008;
-  background-color: #6c2412;
+  color: #BEA008;
+  background-color: #6C2412;
   border: 1px solid black;
   border-bottom: none;
   width: 20%;
   text-align: center;
 }
 .colour #play-nav {
-  box-shadow: inset 0px -25px 20px -20px #6c2412;
+  box-shadow: inset 0px -25px 20px -20px #6C2412;
 }
 .colour #play-nav > .selected {
   z-index: 3;
   border-bottom: none;
-  background-color: #ffffe9;
+  background-color: #FFFFE9;
   font-weight: normal;
 }
 .colour #breaker {
   border: 1px solid black;
-  background-color: #6c2412;
+  background-color: #6C2412;
   height: 1.5em;
 }
 .colour #wiki-overview-tags span {
   margin: 3px 6px;
 }
 .colour .tag.selected {
-  background-color: #ffffe9;
+  background-color: #FFFFE9;
 }
 .colour .tag > * {
   background-color: gainsboro;
@@ -130,8 +130,8 @@
 }
 .colour th,
 .colour .header {
-  color: #ddc342;
-  background-color: #6c2412;
+  color: #DDC342;
+  background-color: #6C2412;
   font-weight: bold;
 }
 .colour #pane > * {
@@ -141,7 +141,7 @@
   background-color: white;
 }
 .colour .summary {
-  border: 1px solid #bea008;
+  border: 1px solid #BEA008;
   margin: 0 0 1em 1em;
   background-color: white;
 }
@@ -163,7 +163,7 @@
 }
 .colour form {
   border: 1px solid black;
-  box-shadow: 0 0 20px 5px #6c2412;
+  box-shadow: 0 0 20px 5px #6C2412;
 }
 .colour form > * {
   padding: 0;
@@ -288,11 +288,11 @@
   height: 1.5em;
   padding: 0 1em;
   line-height: 1.3em;
-  color: #ddc342;
+  color: #DDC342;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-  background-color: #6c2412;
+  background-color: #6C2412;
   border: 1px solid black;
   cursor: pointer;
   box-sizing: border-box;
@@ -310,8 +310,8 @@
 .colour input[type="submit"]:focus,
 .colour input[type="reset"]:focus,
 .colour input[type="button"]:focus {
-  color: #6c2412;
-  background-color: #ffffe9;
+  color: #6C2412;
+  background-color: #FFFFE9;
   outline: 0;
 }
 .colour nav input[type="button"],
@@ -324,10 +324,10 @@
   border: none;
 }
 .colour .toc *:hover {
-  color: #a5774d;
+  color: #A5774D;
 }
 body.colour {
   background-color: Ivory;
   margin-top: 0;
-  box-shadow: 0 0 20px 5px #6c2412;
+  box-shadow: 0 0 20px 5px #6C2412;
 }
